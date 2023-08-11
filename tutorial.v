@@ -329,16 +329,211 @@ Proof.
         + apply true_then_not_false in H. apply H. 
 Qed.
 
+Lemma mult_per_zero_right: forall a : nat,
+    a * O = O.
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - simpl. rewrite dem4. apply IHk.
+Qed.
+
+Lemma mult_per_zero_left: forall a : nat,
+    O * a = O.
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - simpl. reflexivity.
+Qed.
+
+Lemma div_zero: forall n : nat,
+    n <> O -> O / n = O.
+Proof.
+    intro. destruct n.
+    - intros. destruct H. reflexivity.
+    - intros. simpl. reflexivity.
+Qed.
+
+Lemma succ_diff_zero: forall n : nat,
+    S n <> O.
+Proof.
+    intros. discriminate.
+Qed.
+
+Lemma succ_eq_plus_one: forall n : nat,
+    (S n) = n + (S O).
+Proof.
+    intros. induction n as [|k].
+    - simpl. reflexivity.
+    - simpl. rewrite IHk. reflexivity.
+Qed.
+
+Lemma mult_k_mais_um_left: forall n m : nat, 
+    ((S O) + m) * n = n + (m*n).
+Proof.
+    intros. induction n as [|k].
+    - simpl. rewrite mult_per_zero_right. simpl. reflexivity.
+    - simpl ((S O + m) * (S k)). rewrite comutativity_sum.
+        rewrite comutativity_mult. reflexivity.
+Qed.
+
+Lemma n_plus_one_eq_one: forall n : nat,
+    (S O) = (S O) + n -> O = n.
+Proof.
+    intros. induction n as [|k].
+    - reflexivity.
+    - contradict H. discriminate.
+Qed.
+
+Lemma add_one_both_sides: forall n m : nat,
+    n = m -> (S O) + n = (S O) + m.
+Proof.
+    intros. rewrite H. reflexivity.
+Qed.
+
+Lemma sub_one_both_sides: forall n m : nat,
+    S n = S m -> (S n) - (S O) = (S m) - (S O).
+Proof.
+    intros. rewrite H. reflexivity.
+Qed.
+
+Lemma add_sub_order: forall a b c : nat,
+    a + b - c =  a + (b - c).
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - rewrite
+Qed.
+
+Lemma less_one_both_sides: forall n m : nat,
+    (S O) + n = (S O) + m -> n = m.
+Proof.
+    intro. intro. intro. induction n as [|k].
+    - rewrite dem4 in H. apply n_plus_one_eq_one in H. apply H.
+    - rewrite succ_eq_plus_one. rewrite comutativity_sum in H. 
+        rewrite <- succ_eq_plus_one in H.
+        symmetry in H. rewrite comutativity_sum in H.
+        rewrite <- succ_eq_plus_one in H.
+        apply sub_one_both_sides in H.
+        rewrite succ_eq_plus_one in H.
+        simpl in H.  
+Qed.
+
+Lemma elim_brackets_right: forall a b c : nat, 
+    a + b + c = a + (b + c).
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - rewrite succ_eq_plus_one. rewrite (comutativity_sum k).
+    apply add_one_both_sides in IHk.
+Qed.
+
+
+Lemma distributivity_mult_left: forall a b c : nat,
+    a * (b + c) = a * b + a * c.
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - rewrite succ_eq_plus_one. rewrite comutativity_sum.
+    rewrite mult_k_mais_um_left. rewrite IHk. simpl.
+    rewrite comutativity_sum. 
+    
+Qed.
+
+
+Lemma dist_div_one: forall a b : nat,
+    (a + b)/(S O) = (a/(S O)) + (b/(S O)).
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - 
+Qed.
+
+Lemma div_per_one: forall a : nat,
+    a/(S O) = a.
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - symmetry. rewrite succ_eq_plus_one. symmetry in IHk.
+    rewrite IHk.
+Qed.
+
+Lemma sum_frac_same_numerator: forall a b c : nat,
+    (a / (S c)) + (b / (S c)) = (a+b)/(S c).
+Proof.
+    intros. induction c as [|k].
+    - rewrite div_
+Qed.
+
+Lemma comutativity_mult_div: forall a b c : nat,
+    (a*b)/c = a*(b/c).
+Proof.
+    intros. induction a as [|k].
+    - rewrite mult_per_zero_left. rewrite mult_per_zero_left.
+        destruct c.
+        -- simpl. reflexivity.
+        -- simpl. reflexivity.
+    - simpl (S k * (b/c)). symmetry. rewrite comutativity_mult.
+        symmetry in IHk. rewrite comutativity_mult. rewrite IHk.
+        rewrite mult_k_mais_um_left. rewrite <- mult_k_mais_um_left.
+        simpl.
+        
+Qed.
+
+Theorem frac_div: forall n m : nat,
+    n/m = n * ((S O)/m).
+Proof.
+    intros. destruct n, m.
+    - simpl. reflexivity.
+    - simpl. reflexivity.
+    - simpl. rewrite mult_per_zero_right. simpl. reflexivity.
+    - 
+Qed.
+
+
+Theorem division_principal: forall a b c : nat,
+    (a/b) = c <-> a = (b*c).
+Proof.
+    split.
+    - intros. rewrite <- H.
+    
+Qed.
+
+
+(* contradict serve para mostrar que uma hipótese é falsa, e
+    logo se ela é falsa se tem qualquer coisa *)
+
+Lemma div_eq_one: forall n: nat,
+    (S n)/(S n) = (S O).
+Proof.
+    intros. induction n as [|k].
+    - simpl. reflexivity.
+    - rewrite <- IHk.
+        
+Qed.
+
+Lemma div_itself: forall n : nat, 
+    n <> O -> n/n = (S O).
+Proof.
+    intros. destruct n. 
+    - destruct H. reflexivity.
+    - destruct n.
+         
+Qed.
+
+Lemma mult_div_without_change: forall a k : nat,
+    k*(a/k) = a.
+Proof.
+    intros. induction a as [|H].
+    - rewrite div_zero. rewrite mult_per_zero_right. reflexivity.
+    - destruct H. 
+Qed.
+
 
 Theorem classic_even: forall a : nat,
     (even a = true) <-> (exists m : nat, a = (S (S O))*m).
 Proof.
-    intros. induction a as [|k].
-    - split.
-        + simpl. exists O. simpl. reflexivity.
-        + intros. simpl. reflexivity.
-    - split.
-        + destruct IHk.
+    intros. split.
+    - intro. simpl. exists m.
 Qed.
 
 End tutorial.
