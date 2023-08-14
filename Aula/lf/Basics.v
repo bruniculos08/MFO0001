@@ -321,18 +321,36 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
     skip over [simpl] and go directly to [reflexivity]. We'll
     explain this phenomenon later in the chapter. *)
 
-Definition nandb (b1:bool) (b2:bool) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition nandb (b1:bool) (b2:bool) : bool :=
+  match b1 with
+  | false => true
+  | true => negb b2
+  end.
+  (* REPLACE THIS LINE WITH ":= _your_definition_ .". Admitted. *)
 
-Example test_nandb1:               (nandb true false) = true.
-(* FILL IN HERE *) Admitted.
-Example test_nandb2:               (nandb false false) = true.
-(* FILL IN HERE *) Admitted.
-Example test_nandb3:               (nandb false true) = true.
-(* FILL IN HERE *) Admitted.
-Example test_nandb4:               (nandb true true) = false.
-(* FILL IN HERE *) Admitted.
-(** [] *)
+Example test_nandb1:               
+  (nandb true false) = true.
+  simpl.
+  reflexivity.
+  Qed.
+
+Example test_nandb2:               
+  (nandb false false) = true.
+  simpl.
+  reflexivity.
+  Qed.
+
+Example test_nandb3:               
+  (nandb false true) = true.
+  simpl.
+  reflexivity.
+  Qed.
+
+Example test_nandb4:               
+  (nandb true true) = false.
+  simpl.
+  reflexivity.
+  Qed.
 
 (** **** Exercise: 1 star, standard (andb3)
 
@@ -340,8 +358,11 @@ Example test_nandb4:               (nandb true true) = false.
     return [true] when all of its inputs are [true], and [false]
     otherwise. *)
 
-Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool :=
+  match b1 with
+  | false => false
+  | true => andb b2 b3
+  end.
 
 Example test_andb31:                 (andb3 true true true) = true.
 (* FILL IN HERE *) Admitted.
@@ -633,6 +654,8 @@ Definition pred (n : nat) : nat :=
   | S n' => n'
   end.
 
+Check pred.
+
 (** The second branch can be read: "if [n] has the form [S n']
     for some [n'], then return [n']."  *)
 
@@ -649,6 +672,10 @@ End NatPlayground.
 
 Check (S (S (S (S O)))).
 (* ===> 4 : nat *)
+
+(* Two ways of calling the Nat pred fixpoint: *)
+Check pred.
+Check Nat.pred.
 
 Definition minustwo (n : nat) : nat :=
   match n with
@@ -703,10 +730,26 @@ Fixpoint even (n:nat) : bool :=
 Definition odd (n:nat) : bool :=
   negb (even n).
 
-Example test_odd1:    odd 1 = true.
-Proof. simpl. reflexivity.  Qed.
-Example test_odd2:    odd 4 = false.
-Proof. simpl. reflexivity.  Qed.
+Example test_odd1:    
+  odd 1 = true.
+  Proof.
+  unfold odd.
+  simpl.
+  reflexivity.
+  Qed.
+
+Example test_odd2:    
+  odd 4 = false.
+  Proof.
+  unfold odd.
+  simpl.
+  reflexivity.
+  Qed.
+
+(* Poderia se usar a tática de reflexivity pois está reduz ao máximo os
+  dois lados da equação *)
+(* 
+Proof. simpl. reflexivity.  Qed. *)
 
 (** (You may notice if you step through these proofs that
     [simpl] actually has no effect on the goal -- all of the work is
@@ -789,18 +832,30 @@ Fixpoint exp (base power : nat) : nat :=
     factorial was not found in the current environment," it means
     you've forgotten the [:=]. *)
 
-Fixpoint factorial (n:nat) : nat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint factorial (n:nat) : nat :=
+  match n with
+  | O => S O
+  | S n => mult (S n) (factorial n)
+  end.
 
-Example test_factorial1:          (factorial 3) = 6.
-(* FILL IN HERE *) Admitted.
-Example test_factorial2:          (factorial 5) = (mult 10 12).
-(* FILL IN HERE *) Admitted.
-(** [] *)
+Example test_factorial1:          
+  (factorial 3) = 6.
+  simpl.
+  reflexivity.
+  Qed.
+
+Example test_factorial2:          
+  (factorial 5) = (mult 10 12).
+  simpl.
+  reflexivity.
+  Qed.
 
 (** Again, we can make numerical expressions easier to read and write
     by introducing notations for addition, multiplication, and
     subtraction. *)
+
+(* o level diz a precedência, e a associatividade diz a ordem de
+tal precedência *)
 
 Notation "x + y" := (plus x y)
                        (at level 50, left associativity)
