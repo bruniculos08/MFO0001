@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>3110 Coq Tactics Cheatsheet</title>
+<link rel="stylesheet" href="./3110 Coq Tactics Cheatsheet_files/bootstrap.min.css">
+<link rel="stylesheet" href="./3110 Coq Tactics Cheatsheet_files/arduino-light.css">
+<script src="./3110 Coq Tactics Cheatsheet_files/highlight.pack.js.baixados"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" href="./3110 Coq Tactics Cheatsheet_files/coq-tactics-cheatsheet.css">
+<link href="./3110 Coq Tactics Cheatsheet_files/bootstrap.min(1).css" rel="stylesheet"><link href="./3110 Coq Tactics Cheatsheet_files/strapdown.css" rel="stylesheet"><link href="./3110 Coq Tactics Cheatsheet_files/bootstrap-responsive.min.css" rel="stylesheet"><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body style=""><div id="MathJax_Message" style="display: none;"></div><div class="navbar navbar-fixed-top"><div class="navbar-inner"> <div class="container"> <div id="headline" class="brand">3110 Coq Tactics Cheatsheet</div> </div> </div></div>
+
+<div class="container" id="content"><h1>3110 Coq Tactics Cheatsheet</h1>
+<p>When proving theorems in Coq, knowing what tactics you have at your disposal
+is vital. In fact, sometimes it's impossible to complete a proof if you don't
+know the right tactic to use!</p>
+<p>We provide this tactics cheatsheet as a reference. It contains all the tactics
+used in the lecture slides, notes, and lab solutions.</p>
+<p><br></p>
+<h2>Quick Overview</h2>
+<p>Here is a brief overview of the tactics that we've covered. Click on any of
+the links for more details about how to use them.</p>
+<p><strong><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#simplegoals">Solving simple goals:</a></strong>  </p>
+<ul>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#assumption">assumption</a>: Solves the goal if it is already assumed in the 
+context.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#reflexivity">reflexivity</a>: Solves the goal if it is a trivial equality.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#trivial">trivial</a>: Solves a variety of easy goals.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#auto">auto</a>: Solves a greater variety of easy goals.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#discriminate">discriminate</a>: Solves the goal if it is a trivial inequality
+and solves any goal if the context contains a false equality.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#exact">exact</a>: Solves a goal if you know the exact proof term that proves
+the goal.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#contradiction">contradiction</a>: Solves any goal if the context contains 
+<code class="prettyprint lang- prettyprinted" style=""><span class="kwd">False</span></code> or contradictory hypotheses.</li>
+</ul>
+<p><strong><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#transform">Transforming goals:</a></strong></p>
+<ul>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#intros">intros / intro</a>: Introduces variables appearing with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">forall</span></code>
+as well as the premises (left-hand side) of implications.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#simpl">simpl</a>: Simplifies the goal or hypotheses in the context.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#unfold">unfold</a>: Unfolds the definitions of terms.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#apply">apply</a>: Uses implications to transform goals and hypotheses.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#rewrite">rewrite</a>: Replaces a term with an equivalent term if the
+equivalence of the terms has already been proven.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#inversion">inversion</a>: Deduces equalities that must be true given an
+equality between two constructors.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#leftright">left / right</a>: Replaces a goal consisting of a disjunction
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">P \/ Q</span></code> with just <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> or <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code>.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#replace">replace</a>: Replace a term with a equivalent term and generates a
+subgoal to prove that the equality holds.</li>
+</ul>
+<p><strong><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#breakapart">Breaking apart goals and hypotheses:</a></strong></p>
+<ul>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#split">split</a>: Replaces a goal consisting of a conjunction <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span></code> with
+two subgoals <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code>.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#destructandor">destruct (and/or)</a>: Replaces a hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span></code> with two
+hypotheses <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code>. Alternatively, if the hypothesis is a disjunction
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">P \/ Q</span></code>, generates two subgoals, one where <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds and one where <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> holds.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#destructcase">destruct (case analysis)</a>: Generates a subgoal for every
+constructor of an inductive type.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#induction">induction</a>: Generates a subgoal for every constructor of an
+inductive type and provides an induction hypothesis for recursively defined
+constructors.</li>
+</ul>
+<p><strong><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#specificgoals">Solving specific types of goals:</a></strong></p>
+<ul>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#ring">ring</a>: Solves goals consisting of addition and multiplication
+operations.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#tauto">tauto</a>: Solves goals consisting of tautologies that hold in
+constructive logic.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#field">field</a>: Solves goals consisting of addition, subtraction (the
+additive inverse), multiplication, and division (the multiplicative inverse).</li>
+</ul>
+<p><strong><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#tacticals">Tacticals (tactics that act on other tactics):</a></strong></p>
+<ul>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#semicolon">; (semicolon)</a>: Applies the tactic on the right to all subgoals
+produced by the tactic on the left.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#try">try</a>: Attempts to apply the given tactic but does not fail even if the
+given tactic fails.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#or">|| (or)</a>: Tries to apply the tactic on the left; if that fails, tries
+to apply the tactic on the right.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#all">all:</a>: Applies the given tactic to all remaining subgoals.</li>
+<li><a href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html#repeat">repeat</a>: Applies the given tactic repeatedly until it fails.</li>
+</ul>
+<p><br></p>
+<p><a name="simplegoals"></a></p>
+<h2>Solving simple goals</h2>
+<p>The following tactics prove simple goals. Generally, your aim when writing Coq
+proofs is to transform your goal until it can be solved using one of these
+tactics.</p>
+<p><a name="assumption"></a></p>
+<h3>assumption</h3>
+<p>If the goal is already in your context, you can use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">assumption</span></code> tactic to
+immediately prove the goal. </p>
+<!-- `assumption` will fail if it cannot prove the goal. -->
+
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> p_implies_p </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P P_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P : Prop
+P_holds : P
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p>After introducing the hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P_holds</span></code> (which says that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> is true) into
+the context, we can use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">assumption</span></code> to complete the proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> p_implies_p </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P P_holds</span><span class="pun">.</span><span class="pln">
+  assumption</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="reflexivity"></a></p>
+<h3>reflexivity</h3>
+<p>If the goal contains an equality that looks obviously true, the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">reflexivity</span></code>
+tactic can finish off the proof, doing some basic simplification if needed.</p>
+<!-- `reflexivity` will fail if it cannot prove the goal.  -->
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> forty_two </span><span class="pun">:</span><span class="pln"> </span><span class="lit">41</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+41 + 1 = 42
+  </div>
+</pre>
+
+<p>Both the left and right sides of the equality in the goal are clearly equal
+(after simplification), so we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">reflexivity</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> forty_two </span><span class="pun">:</span><span class="pln"> </span><span class="lit">41</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  reflexivity</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="trivial"></a></p>
+<h3>trivial</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> tactic can solve a variety of simple goals. It introduces
+variables and hypotheses into the context and then tries to use various other
+tactics under the hood to solve the goal.</p>
+<p>Any goal that can be solved with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">assumption</span></code> or <code class="prettyprint lang- prettyprinted" style=""><span class="pln">reflexivity</span></code> can also be
+solved using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code>.</p>
+<p>Unlike most of the other tactics in this section, <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> will not fail even
+if it cannot solve the goal.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> p_implies_p </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+P -&gt; P
+  </div>
+</pre>
+
+<p>Previously, we proved this theorem using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">assumption</span></code>; however,
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> can actually take care of both those steps in one fell swoop.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> p_implies_p </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  trivial</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="auto"></a></p>
+<h3>auto</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code> tactic is a more advanced version of <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> that performs a 
+recursive proof search.</p>
+<p>Any goal that can be solved with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> can also be solved using <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code>.</p>
+<p>Like <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code>, <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code> never fails even if it cannot do anything.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_tollens</span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">Q </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+forall P Q : Prop, (P -&gt; Q) -&gt; ~ Q -&gt; ~ P
+  </div>
+</pre>
+
+<p>This proof is too complicated for <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> to handle on its own, but it can be
+solved with <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code>!</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_tollens</span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">Q </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span><span class="kwd">auto</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="discriminate"></a></p>
+<h3>discriminate</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> tactic proves that different constructors of an inductive
+type cannot be equal. In other words, if the goal is an inequality consisting
+of two different constructors, <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> will solve the goal.</p>
+<p><code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> also has another use: if the context contains a equality
+between two different constructors (i.e. a false assumption), you can use
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> to prove any goal. </p>
+<!-- `discriminate` will fail if it cannot prove the goal. -->
+
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Inductive</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> water </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> fire_is_not_water </span><span class="pun">:</span><span class="pln"> fire </span><span class="pun">&lt;&gt;</span><span class="pln"> water</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+fire &lt;&gt; water
+  </div>
+</pre>
+
+<p>You may be surprised to learn that <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code> cannot solve this simple goal! 
+However, <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> takes care of this proof easily.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Inductive</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> water </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> fire_is_not_water </span><span class="pun">:</span><span class="pln"> fire </span><span class="pun">&lt;&gt;</span><span class="pln"> water</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  discriminate</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> false_implies_anything </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P zero_equals_one</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P : Prop
+zero_equals_one : 0 = 1
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p>Recall that the natural numbers in Coq are defined as an inductive type with
+constructors <code class="prettyprint lang- prettyprinted" style=""><span class="pln">O</span></code> (zero) and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">S</span></code> (successor of). The constructors on both sides
+of the false equality <code class="prettyprint lang- prettyprinted" style=""><span class="lit">0</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span></code> are different, so we can use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> to
+prove our goal that any proposition <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> false_implies_anything </span><span class="pun">:</span><span class="pln"> forall P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">,</span><span class="pln">
+  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P zero_equals_one</span><span class="pun">.</span><span class="pln">
+  discriminate</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="exact"></a></p>
+<h3>exact</h3>
+<p>If you know the exact proof term that proves the goal, you can provide it
+directly using the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">exact</span></code> tactic.</p>
+<!-- `exact` will fail if it cannot prove the goal. -->
+
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> everything </span><span class="pun">:</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+42 = 42
+  </div>
+</pre>
+
+<p>Suppose we know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">eq_refl </span><span class="lit">42</span></code> is a term with the type <code class="prettyprint lang- prettyprinted" style=""><span class="lit">42</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span></code>. Then, we
+prove that there exists a value that inhabits this type by supplying the term
+directly using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">exact</span></code>, which proves the theorem.</p>
+<p>(We could have also used <code class="prettyprint lang- prettyprinted" style=""><span class="pln">reflexivity</span></code> or other tactics to prove this goal.)</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> everything </span><span class="pun">:</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  exact </span><span class="pun">(</span><span class="pln">eq_refl </span><span class="lit">42</span><span class="pun">).</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="contradiction"></a></p>
+<h3>contradiction</h3>
+<p>If there is a hypothesis that is equivalent to <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">False</span></code> or two contradictory
+hypotheses in the context, you can use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">contradiction</span></code> tactic to prove any
+goal.</p>
+<!-- `contradiction` will fail if it cannot find the appropriate hypotheses in the
+context. -->
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> law_of_contradiction </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_not_P</span><span class="pun">.</span><span class="pln">
+  destruct P_and_not_P </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[</span><span class="pln">P_holds not_P</span><span class="pun">].</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_holds : P
+not_P : ~ P
+-------------------(1/1)
+Q
+  </div>
+</pre>
+
+<p>After destructing the hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">P</span></code>, we obtain two hypotheses <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> and
+<code class="prettyprint lang- prettyprinted" style=""><span class="pun">~</span><span class="pln">P</span></code> that contradict each other, so we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">contradiction</span></code> to complete the
+proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> law_of_contradiction </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_not_P</span><span class="pun">.</span><span class="pln">
+  destruct P_and_not_P </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[</span><span class="pln">P_holds not_P</span><span class="pun">].</span><span class="pln">
+  contradiction</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+<p><a name="transform"></a></p>
+<h2>Transforming goals</h2>
+<p>While proving a theorem, you will typically need to transform your goal
+to introduce assumptions into the context, simplify the goal, make use of
+assumptions, and so on. The following tactics allow you to make progress toward
+solving a goal.</p>
+<p><a name="intros"></a></p>
+<h3>intros / intro</h3>
+<p>If there are universally quantified variables in the goal (i.e. <code class="prettyprint lang- prettyprinted" style=""><span class="pln">forall</span></code>), you
+can introduce those variables into the context using the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> tactic. You
+can also use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> to introduce all propositions on the left side of 
+an implication as assumptions.</p>
+<p>If <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> is used by itself, Coq will introduce all the variables and
+hypotheses that it can, and it will assign names to them automatically. You can
+provide your own names (or introduce fewer things) by supplying those names in
+order. See Example 2.</p>
+<p><code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> also has a sister tactic <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intro</span></code> that introduces just one thing.</p>
+<p><code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> used by itself will never fail, even if there's nothing to introduce.
+If you supply some names to <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code>, however, it will fail if a name is
+already in use or if there's not enough stuff left to introduce.</p>
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_tollens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">Q </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+forall P Q : Prop, (P -&gt; Q) -&gt; ~ Q -&gt; ~ P
+  </div>
+</pre>
+
+<p>We can introduce the two variables <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code>, as well as the two hypotheses
+<code class="prettyprint lang- prettyprinted" style=""><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pun">~</span><span class="pln">Q</span></code> using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_tollens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">Q </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+H : P -&gt; Q
+H0 : ~ Q
+-------------------(1/1)
+~ P
+  </div>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<p>The names that Coq chose for the hypotheses <code class="prettyprint lang- prettyprinted" style=""><span class="pln">H</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">H0</span></code> aren't very 
+descriptive. We can provide more descriptive names instead. Note that we also
+have to give names to the two variables after the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">forall</span></code> because <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code>
+introduces things in order.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_tollens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">Q </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_implies_Q not_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_implies_Q : P -&gt; Q
+not_Q : ~ Q
+-------------------(1/1)
+~ P
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="simpl"></a></p>
+<h3>simpl</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code> tactic reduces complex terms to simpler forms. You'll find that
+it's not always necessary to use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code> because other tactics (e.g. 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code>) can do the simplification themselves, but it's often helpful to
+try <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code> to help you figure out what you, as the writer of the proof,
+should do next.</p>
+<p>You can also use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code> on a hypothesis in the context with the syntax
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl </span><span class="kwd">in</span><span class="pln"> </span><span class="str">&lt;hypothesis&gt;</span></code>.</p>
+<p><code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code> will never fail, even if no simplification can be done.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> switch_to_honors </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2110</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2112.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+2110 + 2 = 2112
+  </div>
+</pre>
+
+<p>Let's simplify that goal with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> switch_to_honors </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2110</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2112.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  simpl</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+2112 = 2112
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="unfold"></a></p>
+<h3>unfold</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold</span></code> tactic replaces a defined term in the goal with its definition.</p>
+<p>You can also use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold</span></code> on a hypothesis in the context with the syntax
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold </span><span class="str">&lt;term&gt;</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="str">&lt;hypothesis&gt;</span></code>.</p>
+<!-- `unfold <term>` will fail if the term does not have a corresponding
+definition. -->
+
+
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Definition</span><span class="pln"> plus_two </span><span class="pun">(</span><span class="pln">x </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">)</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> nat </span><span class="pun">:=</span><span class="pln">
+  x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> switch_to_honors_again </span><span class="pun">:</span><span class="pln"> 
+  plus_two </span><span class="lit">2110</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2112.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+plus_two 2110 = 2112
+  </div>
+</pre>
+
+<p>This time, nothing happens if we try <code class="prettyprint lang- prettyprinted" style=""><span class="pln">simpl</span></code>. However, we can <code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold</span></code> and 
+transform the goal into something that we can then simplify.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> switch_to_honors_again </span><span class="pun">:</span><span class="pln"> 
+  plus_two </span><span class="lit">2110</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2112.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  unfold plus_two</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+2110 + 2 = 2112
+  </div>
+</pre>
+
+
+<p><strong>Example 2:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> demorgan </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">~(</span><span class="pln">P \/ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q not_P_or_Q</span><span class="pun">.</span><span class="pln">
+  unfold </span><span class="kwd">not</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+not_P_or_Q : ~ (P \/ Q)
+-------------------(1/1)
+(P -&gt; False) /\ (Q -&gt; False)
+  </div>
+</pre>
+
+<p>We'd like to unfold the <code class="prettyprint lang- prettyprinted" style=""><span class="pun">~(</span><span class="pln">P \/ Q</span><span class="pun">)</span></code> in our context as well, so we use 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold</span><span class="pun">..</span><span class="kwd">in</span><span class="pun">..</span></code>.</p>
+<p>(In thie case, we could have also applied <code class="prettyprint lang- prettyprinted" style=""><span class="pln">unfold</span></code> before <code class="prettyprint lang- prettyprinted" style=""><span class="pln">intros</span></code> to unfold
+all the negations at once.)</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> demorgan </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">~(</span><span class="pln">P \/ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q not_P_or_Q</span><span class="pun">.</span><span class="pln">
+  unfold </span><span class="kwd">not</span><span class="pun">.</span><span class="pln"> 
+  unfold </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> not_P_or_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+not_P_or_Q : P \/ Q -&gt; False
+-------------------(1/1)
+(P -&gt; False) /\ (Q -&gt; False)
+  </div>
+</pre>
+
+<p><br>
+<br></p>
+<p><a name="apply"></a></p>
+<h3>apply</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> tactic has a variety of uses.</p>
+<p>If your goal is some proposition <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> and you know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A </span><span class="pun">-&gt;</span><span class="pln"> B</span></code>, then in order
+to prove that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> holds, it suffices to show <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> holds. <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> uses this
+reasoning to transform the goal from <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> to <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code>. See Example 1.</p>
+<p><code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> can also be used on hypotheses. If you have some hypothesis that states
+that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> holds, as well as another hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A </span><span class="pun">-&gt;</span><span class="pln"> B</span></code>, you can use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> to
+transform the first hypothesis into <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code>. The syntax is 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply </span><span class="str">&lt;term&gt;</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="str">&lt;hypothesis&gt;</span></code> or 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply </span><span class="str">&lt;term&gt;</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="str">&lt;hypothesis&gt;</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">&lt;</span><span class="kwd">new</span><span class="pun">-</span><span class="pln">hypothesis</span><span class="pun">&gt;</span></code>. See Example 2.</p>
+<p>You can even apply previously proven theorems. See Example 3.</p>
+<!-- `apply` will fail if Coq cannot figure out a way to match the given term with
+the goal or hypothesis. -->
+
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_ponens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_implies_Q P_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_implies_Q : P -&gt; Q
+P_holds : P
+-------------------(1/1)
+Q
+  </div>
+</pre>
+
+<p>Since we know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span></code>, proving that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds would also prove that 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> holds. Therefore, we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> to transform our goal.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_ponens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_implies_Q P_holds</span><span class="pun">.</span><span class="pln">
+  apply P_implies_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_implies_Q : P -&gt; Q
+P_holds : P
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<p>Alternatively, we notice that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds in our context, and because we know
+that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span></code>, we can apply that implication to our hypothesis that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds
+to transform it.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_ponens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_implies_Q P_holds</span><span class="pun">.</span><span class="pln">
+  apply P_implies_Q </span><span class="kwd">in</span><span class="pln"> P_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_implies_Q : P -&gt; Q
+P_holds : Q
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p>Note that this <em>replaces</em> our previous hypothesis (and now its name is no 
+longer very applicable)! To prevent this, we can give our new hypothesis its own
+name using the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span><span class="pun">..</span><span class="kwd">in</span><span class="pun">..</span><span class="kwd">as</span><span class="pun">..</span></code> syntax.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> modus_ponens </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_implies_Q P_holds</span><span class="pun">.</span><span class="pln">
+  apply P_implies_Q </span><span class="kwd">in</span><span class="pln"> P_holds </span><span class="kwd">as</span><span class="pln"> Q_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_implies_Q : P -&gt; Q
+P_holds : P
+Q_holds : Q
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p><strong>Example 3:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Lemma</span><span class="pln"> modus_ponens</span><span class="str">''</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span><span class="kwd">auto</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Qed</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> double_negation </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  unfold </span><span class="kwd">not</span><span class="pun">.</span><span class="pln"> intro P</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P : Prop
+-------------------(1/1)
+P -&gt; (P -&gt; False) -&gt; False
+  </div>
+</pre>
+
+<p>We notice that our goal is just an instance of <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> Q</span></code>, which
+we already proved is true. Therefore, we can use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">apply</span></code> to apply our lemma,
+which finishes the proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Lemma</span><span class="pln"> modus_ponens</span><span class="str">''</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span><span class="kwd">auto</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Qed</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> double_negation </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~~</span><span class="pln">P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  unfold </span><span class="kwd">not</span><span class="pun">.</span><span class="pln"> intro P</span><span class="pun">.</span><span class="pln">
+  apply modus_ponens</span><span class="str">''</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="rewrite"></a></p>
+<h3>rewrite</h3>
+<p>Given some known equality <code class="prettyprint lang- prettyprinted" style=""><span class="pln">a </span><span class="pun">=</span><span class="pln"> b</span></code>, the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite</span></code> tactic lets you replace <code class="prettyprint lang- prettyprinted" style=""><span class="pln">a</span></code>
+with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">b</span></code> or vice versa in a goal or hypothesis</p>
+<p>The syntax is <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="str">&lt;equality&gt;</span></code> to replace <code class="prettyprint lang- prettyprinted" style=""><span class="pln">a</span></code> with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">b</span></code> in the goal or
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite </span><span class="pun">&lt;-</span><span class="pln"> </span><span class="str">&lt;equality&gt;</span></code> to replace <code class="prettyprint lang- prettyprinted" style=""><span class="pln">b</span></code> with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">a</span></code>. Note that 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite </span><span class="str">&lt;equality&gt;</span></code> is identical to <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="str">&lt;equality&gt;</span></code>.</p>
+<p>You can also rewrite terms in hypotheses with the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite</span><span class="pun">..</span><span class="kwd">in</span><span class="pun">..</span></code> syntax.</p>
+<!-- `rewrite` will fail if there's no applicable term to rewrite. -->
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> add_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x y </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  x </span><span class="pun">+</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> y </span><span class="pun">+</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln"> induction x</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> trivial</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln"> 
+  </span></code>
+  <div class="context">1 subgoal
+x, y : nat
+IHx : x + y = y + x
+-------------------(1/1)
+S (x + y) = y + S x
+  </div>
+</pre>
+
+<p>We can try using <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code> to see if Coq can figure out the rest of the proof for
+us, but it can't because it doesn't know that addition is commutative (that's
+what we're trying to prove!).</p>
+<p>However, we can apply our inductive hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">x </span><span class="pun">+</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> y </span><span class="pun">+</span><span class="pln"> x</span></code> by rewriting
+the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">x </span><span class="pun">+</span><span class="pln"> y</span></code> in the goal as <code class="prettyprint lang- prettyprinted" style=""><span class="pln">y </span><span class="pun">+</span><span class="pln"> x</span></code> using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite</span></code>:</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> add_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x y </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  x </span><span class="pun">+</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> y </span><span class="pun">+</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln"> induction x</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> trivial</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln"> rewrite </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">IHx</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+x, y : nat
+IHx : x + y = y + x
+-------------------(1/1)
+S (y + x) = y + S x
+  </div>
+</pre>
+
+<p>Now you can finish the proof by simply using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> or <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code>.</p>
+<p><br>
+<br></p>
+<p><a name="inversion"></a></p>
+<h3>inversion</h3>
+<p>Suppose you have a hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">S m </span><span class="pun">=</span><span class="pln"> S n</span></code>, where <code class="prettyprint lang- prettyprinted" style=""><span class="pln">m</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">n</span></code> are <code class="prettyprint lang- prettyprinted" style=""><span class="pln">nats</span></code>. The
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">inversion</span></code> tactic allows you to conclude that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">m </span><span class="pun">=</span><span class="pln"> n</span></code>. In general, if you
+have a hypothesis that states an equality between two constructors and
+the constructors are the same, <code class="prettyprint lang- prettyprinted" style=""><span class="pln">inversion</span></code> helps you figure out that all
+the arguments to those constructors must be equal as well, and it tries
+to rewrite the goal using that information.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> succ_eq_implies_eq </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x y </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  S x </span><span class="pun">=</span><span class="pln"> S y </span><span class="pun">-&gt;</span><span class="pln"> x </span><span class="pun">=</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros x y succ_eq</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+x, y : nat
+succ_eq : S x = S y
+-------------------(1/1)
+x = y
+  </div>
+</pre>
+
+<p>Since <code class="prettyprint lang- prettyprinted" style=""><span class="pln">S x </span><span class="pun">=</span><span class="pln"> S y</span></code>, we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">inversion</span></code> to extract a new hypothesis that states
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">x </span><span class="pun">=</span><span class="pln"> y</span></code>. <code class="prettyprint lang- prettyprinted" style=""><span class="pln">inversion</span></code> actually goes one step further and rewrites the goal
+using that equality.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> succ_eq_implies_eq </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x y </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  S x </span><span class="pun">=</span><span class="pln"> S y </span><span class="pun">-&gt;</span><span class="pln"> x </span><span class="pun">=</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros x y succ_eq</span><span class="pun">.</span><span class="pln">
+  inversion succ_eq</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+x, y : nat
+succ_eq : S x = S y
+H0 : x = y
+-------------------(1/1)
+y = y
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="leftright"></a></p>
+<h3>left / right</h3>
+<p>If the goal is a disjunction <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A \/ B</span></code>, the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">left</span></code> tactic replaces the goal
+with the left side of the disjunction <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code>, and the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">right</span></code> tactic replaces
+the goal with the right side <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code>.</p>
+<!-- `left` and `right` will fail if the goal is not a disjunction. -->
+
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_left </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P \/ Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_holds : P
+-------------------(1/1)
+P \/ Q
+  </div>
+</pre>
+
+<p>Since we know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds, it makes sense to change the goal to the left
+side of the disjunction using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">left</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_left </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> P \/ Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_holds</span><span class="pun">.</span><span class="pln">
+  left</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_holds : P
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_right </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  Q </span><span class="pun">-&gt;</span><span class="pln"> P \/ Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q Q_holds</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+Q_holds : Q
+-------------------(1/1)
+P \/ Q
+  </div>
+</pre>
+
+<p>This time, we know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> holds, so we replace the goal with its right
+side using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">right</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_right </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  Q </span><span class="pun">-&gt;</span><span class="pln"> P \/ Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q Q_holds</span><span class="pun">.</span><span class="pln">
+  right</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+Q_holds : Q
+-------------------(1/1)
+Q
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="replace"></a></p>
+<h3>replace</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">replace</span></code> tactic allows you to replace a term in the goal with another
+term and produces a new subgoal that asks you to prove that those two terms are
+equal. The syntax is <code class="prettyprint lang- prettyprinted" style=""><span class="pln">replace </span><span class="str">&lt;term&gt;</span><span class="pln"> </span><span class="kwd">with</span><span class="pln"> </span><span class="str">&lt;term&gt;</span></code>.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> one_x_one </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  </span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intro</span><span class="pun">.</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+x : nat
+-------------------(1/1)
+S (x + 1) = S (S x)
+  </div>
+</pre>
+
+<p>We believe that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">S x</span></code> are equal, so we can use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">replace</span></code> to assert
+that this equality is true and then prove it later. </p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> one_x_one </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">x </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  </span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intro</span><span class="pun">.</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln">
+  replace </span><span class="pun">(</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">with</span><span class="pln"> </span><span class="pun">(</span><span class="pln">S x</span><span class="pun">).</span><span class="pln">
+  </span></code>
+  <div class="context">2 subgoals
+x : nat
+-------------------(1/2)
+S (S x) = S (S x)
+-------------------(2/2)
+S x = x + 1
+  </div>
+</pre>
+
+
+
+<p><br>
+<br></p>
+<p><a name="breakapart"></a></p>
+<h2>Breaking apart goals and hypotheses</h2>
+<p>The following tactics break apart goals (or hypotheses) into several simpler
+subgoals (or hypotheses).</p>
+<p><a name="split"></a></p>
+<h3>split</h3>
+<p>If the goal is a conjunction <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A </span><span class="pun">/</span><span class="pln">\ B</span></code>, the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">split</span></code> tactic replaces the goal
+with two subgoals <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code>.</p>
+<!-- `split` will fail if the goal is not a conjunction. -->
+
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> implies_and </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q R </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> R</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">Q </span><span class="pun">/</span><span class="pln">\ R</span><span class="pun">).</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q R P_holds</span><span class="pun">.</span><span class="pln">
+  intros P_implies_Q P_implies_R</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q, R : Prop
+P_holds : P
+P_implies_Q : P -&gt; Q
+P_implies_R : P -&gt; R
+-------------------(1/1)
+Q /\ R
+  </div>
+</pre>
+
+<p>In order to make progress in the proof, we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">split</span></code> to break up 
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q </span><span class="pun">/</span><span class="pln">\ R</span></code> into two subgoals.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> implies_and </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q R </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">P </span><span class="pun">-&gt;</span><span class="pln"> R</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">Q </span><span class="pun">/</span><span class="pln">\ R</span><span class="pun">).</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q R P_holds</span><span class="pun">.</span><span class="pln">
+  intros P_implies_Q P_implies_R</span><span class="pun">.</span><span class="pln">
+  split</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">2 subgoals
+P, Q, R : Prop
+P_holds : P
+P_implies_Q : P -&gt; Q
+P_implies_R : P -&gt; R
+-------------------(1/2)
+Q
+-------------------(2/2)
+R
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="destructandor"></a></p>
+<h3>destruct (and / or)</h3>
+<p>If there is a hypothesis containing a conjunction or a disjunction in the
+context, you can use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code> tactic to break them apart.</p>
+<p>A hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A </span><span class="pun">/</span><span class="pln">\ B</span></code> means that both <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> hold, so it can be destructed
+into two new hypotheses <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code>. You can also use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span><span class="pun">..</span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[...]</span></code>
+syntax to give your own name to these new hypotheses. See Example 1.</p>
+<p>On the other hand, a hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A \/ B</span></code> means that at least one of <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code>
+holds, so in order to make use of this hypothesis, you must prove that the goal
+holds when <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> is true (and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> may not be) and when <code class="prettyprint lang- prettyprinted" style=""><span class="pln">B</span></code> is true (and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">A</span></code> may
+not be). You can also use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span><span class="pun">..</span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[...</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> </span><span class="pun">...]</span></code> syntax to provide
+your own names to the hypotheses that are generated (note the presence of the
+the vertical bar). See Example 2.</p>
+<p><strong>Example 1:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> and_left </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_and_Q : P /\ Q
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p>Since there's a conjunction <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span></code> in our context, using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code> on it
+will give us both <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> and <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> as separate hypotheses.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> and_left </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_and_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+H : P
+H0 : Q
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p>The names that Coq chose for the new hypotheses aren't very descriptive, so
+let's provide our own.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> and_left </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_and_Q </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[</span><span class="pln">P_holds Q_holds</span><span class="pun">].</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_holds : P
+Q_holds : Q
+-------------------(1/1)
+P
+  </div>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P \/ Q </span><span class="pun">-&gt;</span><span class="pln"> Q \/ P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_or_Q</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+P_or_Q : P \/ Q
+-------------------(1/1)
+Q \/ P
+  </div>
+</pre>
+
+<p>We can <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code> the hypothesis <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P \/ Q</span></code> to replace our current goal with two
+new subgoals <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P \/ Q</span></code> with different contexts: one in which <code class="prettyprint lang- prettyprinted" style=""><span class="pln">P</span></code> holds and one
+in which <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> holds.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P \/ Q </span><span class="pun">-&gt;</span><span class="pln"> Q \/ P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_or_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_or_Q </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[</span><span class="pln">P_holds </span><span class="pun">|</span><span class="pln"> Q_holds</span><span class="pun">].</span><span class="pln">
+  </span></code>
+  <div class="context">2 subgoals
+P, Q : Prop
+P_holds : P
+-------------------(1/2)
+Q \/ P
+-------------------(2/2)
+Q \/ P
+  </div>
+</pre>
+
+<p>After we've proven the first subgoal, we observe that, in the context for the 
+second subgoal, we have the hypothesis that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">Q</span></code> holds instead.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> or_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P \/ Q </span><span class="pun">-&gt;</span><span class="pln"> Q \/ P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_or_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_or_Q </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[</span><span class="pln">P_holds </span><span class="pun">|</span><span class="pln"> Q_holds</span><span class="pun">].</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> right</span><span class="pun">.</span><span class="pln"> assumption</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> 
+  </span></code>
+  <div class="context">1 subgoal
+P, Q : Prop
+Q_holds : Q
+-------------------(1/1)
+Q \/ P
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="destructcase"></a></p>
+<h3>destruct (case analysis)</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code> tactic can also be used for more general case analysis by 
+destructing on a term or variable whose type is an inductive type.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Inductive</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> water </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Definition</span><span class="pln"> weakness </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">)</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+  match e </span><span class="kwd">with</span><span class="pln">
+  </span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">=&gt;</span><span class="pln"> fire
+  </span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">=&gt;</span><span class="pln"> water
+  </span><span class="pun">|</span><span class="pln"> water </span><span class="pun">=&gt;</span><span class="pln"> grass
+  </span><span class="kwd">end</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> never_weak_to_self </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+  weakness e </span><span class="pun">&lt;&gt;</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+forall e : element, weakness e &lt;&gt; e
+  </div>
+</pre>
+
+<p>In order to proceed with this proof, we need to prove that it holds for each
+constructor of <code class="prettyprint lang- prettyprinted" style=""><span class="pln">element</span></code> case-by-case, so we use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code>.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> never_weak_to_self </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+  weakness e </span><span class="pun">&lt;&gt;</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">3 subgoals
+-------------------(1/3)
+weakness grass &lt;&gt; grass
+-------------------(2/3)
+weakness fire &lt;&gt; fire
+-------------------(3/3)
+weakness water &lt;&gt; water
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="induction"></a></p>
+<h3>induction</h3>
+<p>Using the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">induction</span></code> tactic is the same as using the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct</span></code> tactic, except
+that it also introduces induction hypotheses as appropriate.</p>
+<p>Once again, you can use the <code class="prettyprint lang- prettyprinted" style=""><span class="pln">induction</span><span class="pun">..</span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[...]</span></code> syntax to give names to the
+terms and hypotheses produced in the different cases.</p>
+<p>See lecture, notes, and lab 22 for more on induction.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> n_plus_n </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">n </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  n </span><span class="pun">+</span><span class="pln"> n </span><span class="pun">=</span><span class="pln"> n </span><span class="pun">*</span><span class="pln"> </span><span class="lit">2.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  induction n </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[|</span><span class="pln"> x IH</span><span class="pun">].</span><span class="pln">
+  </span></code>
+  <div class="context">2 subgoals
+-------------------(1/2)
+0 + 0 = 0 * 2
+-------------------(2/2)
+S x + S x = S x * 2
+  </div>
+</pre>
+
+<p>The base case <code class="prettyprint lang- prettyprinted" style=""><span class="lit">0</span></code> doesn't produce anything new, so we don't need to provide any
+names there. The inductive case <code class="prettyprint lang- prettyprinted" style=""><span class="pln">S x</span></code> produces a new term <code class="prettyprint lang- prettyprinted" style=""><span class="pln">x</span></code> and a new
+hypothesis, so we give those names. The vertical bar separates the two cases.</p>
+<p>After proving the base case, we move on to the inductive case. Hey, Coq came
+up with the correct induction hypothesis for us. Thanks, Coq!</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> n_plus_n </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">n </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  n </span><span class="pun">+</span><span class="pln"> n </span><span class="pun">=</span><span class="pln"> n </span><span class="pun">*</span><span class="pln"> </span><span class="lit">2.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  induction n </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[|</span><span class="pln"> x IH</span><span class="pun">].</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> reflexivity</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+x : nat
+IH : x + x = x * 2
+-------------------(1/1)
+S (x + S x) = S (S (x * 2))
+  </div>
+</pre>
+
+<p>From here, we can make use of the induction hypothesis with <code class="prettyprint lang- prettyprinted" style=""><span class="pln">rewrite</span></code> and then
+apply <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">auto</span></code> to knock out the rest of the proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> n_plus_n </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">n </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  n </span><span class="pun">+</span><span class="pln"> n </span><span class="pun">=</span><span class="pln"> n </span><span class="pun">*</span><span class="pln"> </span><span class="lit">2.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  induction n </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">[|</span><span class="pln"> x IH</span><span class="pun">].</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> reflexivity</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> simpl</span><span class="pun">.</span><span class="pln"> rewrite </span><span class="pun">&lt;-</span><span class="pln"> IH</span><span class="pun">.</span><span class="pln"> </span><span class="kwd">auto</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="specificgoals"></a></p>
+<h2>Solving specific types of goals</h2>
+<p>The tactics in this section are automated tactics that are specialized for
+solving certain types of goals.</p>
+<p><a name="ring"></a></p>
+<h3>ring</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">ring</span></code> tactic can solve any goal that contains only addition and
+multiplication operations.</p>
+<p>You must first use the command <code class="prettyprint lang- prettyprinted" style=""><span class="typ">Require</span><span class="pln"> </span><span class="typ">Import</span><span class="pln"> </span><span class="typ">Arith</span><span class="pun">.</span></code> in order to use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">ring</span></code>.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Require</span><span class="pln"> </span><span class="typ">Import</span><span class="pln"> </span><span class="typ">Arith</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> foil </span><span class="pun">:</span><span class="pln"> forall a b c d</span><span class="pun">,</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">a </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="pun">(</span><span class="pln">c </span><span class="pun">+</span><span class="pln"> d</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">*</span><span class="pln">c </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">*</span><span class="pln">c </span><span class="pun">+</span><span class="pln"> a</span><span class="pun">*</span><span class="pln">d </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">*</span><span class="pln">d</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln"> ring</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+<p>It would be pretty painful to prove this using simpler tactics, but fortunately
+<code class="prettyprint lang- prettyprinted" style=""><span class="pln">ring</span></code> is here to save the day.</p>
+<p><br>
+<br></p>
+<p><a name="tauto"></a></p>
+<h3>tauto</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">tauto</span></code> tactic can solve any goal that's a tautology (in constructive 
+logic). A tautology is a logical formula that's always true, regardless of the
+values of the variables in it.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> demorgan </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">~(</span><span class="pln">P \/ Q</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">~</span><span class="pln">P </span><span class="pun">/</span><span class="pln">\ </span><span class="pun">~</span><span class="pln">Q</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  tauto</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+<p>DeMorgan's law is a tautology, so it can be proven by applying <code class="prettyprint lang- prettyprinted" style=""><span class="pln">tauto</span></code>.</p>
+<p><br>
+<br></p>
+<p><a name="field"></a></p>
+<h3>field</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">field</span></code> tactic can solve any goal that contains addition, subtraction
+(the additive inverse), multiplication, and division (the multiplicative
+inverse). </p>
+<p>Note that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">field</span></code> cannot be used on the natural numbers or integers, because
+integer division is not the inverse of multiplication (e.g. <code class="prettyprint lang- prettyprinted" style=""><span class="pun">(</span><span class="lit">1</span><span class="pln"> </span><span class="pun">/</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">2</span></code> does
+not equal 1).</p>
+<p>You must first use the command <code class="prettyprint lang- prettyprinted" style=""><span class="typ">Require</span><span class="pln"> </span><span class="typ">Import</span><span class="pln"> </span><span class="typ">Field</span><span class="pun">.</span></code> in order to use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">field</span></code>.</p>
+<p>See <a href="http://www.cs.cornell.edu/courses/cs3110/2017fa/l/22-coq-induction/notes.v">lecture notes 22</a> for more information on <code class="prettyprint lang- prettyprinted" style=""><span class="pln">field</span></code>.</p>
+<p><br>
+<br></p>
+<p><a name="tacticals"></a></p>
+<h2>Tacticals</h2>
+<p>The following <em>tacticals</em> are "higher-order tactics" that operate on tactics. </p>
+<p><a name="semicolon"></a></p>
+<h3>; (semicolon)</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pun">;</span></code> tactical applies the tactic on the right side of the semicolon to all
+the subgoals produced by tactic on the left side.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> and_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">/</span><span class="pln">\ Q </span><span class="pun">-&gt;</span><span class="pln"> Q </span><span class="pun">/</span><span class="pln">\ P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_and_Q</span><span class="pun">.</span><span class="pln"> 
+  split</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> assumption</span><span class="pun">.</span><span class="pln">
+  </span><span class="pun">-</span><span class="pln"> assumption</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Qed</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">
+  </div>
+</pre>
+
+<p>The two subgoals generated by <code class="prettyprint lang- prettyprinted" style=""><span class="pln">split</span></code> were solved using the same tactic. We can
+use <code class="prettyprint lang- prettyprinted" style=""><span class="pun">;</span></code> to make the code more concise.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> and_comm </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">P Q </span><span class="pun">:</span><span class="pln"> </span><span class="typ">Prop</span><span class="pun">),</span><span class="pln">
+  P </span><span class="pun">/</span><span class="pln">\ Q </span><span class="pun">-&gt;</span><span class="pln"> Q </span><span class="pun">/</span><span class="pln">\ P</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros P Q P_and_Q</span><span class="pun">.</span><span class="pln">
+  destruct P_and_Q</span><span class="pun">.</span><span class="pln"> 
+  split</span><span class="pun">;</span><span class="pln"> assumption</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Qed</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">
+  </div>
+</pre>
+
+<p><br>
+<br></p>
+<p><a name="try"></a></p>
+<h3>try</h3>
+<p>Many tactics will fail if they are not applicable. The <code class="prettyprint lang- prettyprinted" style=""><span class="kwd">try</span></code> tactical lets you
+attempt to use a tactic and allows the tactic to go through even if it
+fails. This can be particularly useful when chaining tactics together using
+<code class="prettyprint lang- prettyprinted" style=""><span class="pun">;</span></code>.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Inductive</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">:</span><span class="pln"> element
+</span><span class="pun">|</span><span class="pln"> water </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Definition</span><span class="pln"> weakness </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">)</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> element </span><span class="pun">:=</span><span class="pln">
+  match e </span><span class="kwd">with</span><span class="pln">
+  </span><span class="pun">|</span><span class="pln"> grass </span><span class="pun">=&gt;</span><span class="pln"> fire
+  </span><span class="pun">|</span><span class="pln"> fire </span><span class="pun">=&gt;</span><span class="pln"> water
+  </span><span class="pun">|</span><span class="pln"> water </span><span class="pun">=&gt;</span><span class="pln"> grass
+  </span><span class="kwd">end</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> fire_weak_implies_grass </span><span class="pun">:</span><span class="pln"> 
+  forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+    weakness e </span><span class="pun">=</span><span class="pln"> fire </span><span class="pun">-&gt;</span><span class="pln"> e </span><span class="pun">=</span><span class="pln"> grass</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">3 subgoals
+-------------------(1/3)
+weakness grass = fire -&gt; grass = grass
+-------------------(2/3)
+weakness fire = fire -&gt; fire = grass
+-------------------(3/3)
+weakness water = fire -&gt; water = grass
+  </div>
+</pre>
+
+<p>We'd like to use <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> to take care of the second and third subgoals,
+but we can't simply write <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct e</span><span class="pun">;</span><span class="pln"> discriminate</span><span class="pun">.</span></code> because <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code>
+will fail when Coq tries to apply it to the first subgoal. This is where the
+<code class="prettyprint lang- prettyprinted" style=""><span class="kwd">try</span></code> tactic comes in handy.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> fire_weak_implies_grass </span><span class="pun">:</span><span class="pln"> 
+  forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+    weakness e </span><span class="pun">=</span><span class="pln"> fire </span><span class="pun">-&gt;</span><span class="pln"> e </span><span class="pun">=</span><span class="pln"> grass</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">try</span><span class="pln"> discriminate</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+weakness grass = fire -&gt; grass = grass
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<p><a name="or"></a></p>
+<h3>|| (or)</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pun">||</span></code> tactical first tries the tactic on the left side; if it fails, then it
+applies the tactic on the right side.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> fire_weak_implies_grass </span><span class="pun">:</span><span class="pln"> 
+  forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+    weakness e </span><span class="pun">=</span><span class="pln"> fire </span><span class="pun">-&gt;</span><span class="pln"> e </span><span class="pun">=</span><span class="pln"> grass</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">;</span><span class="pln"> </span><span class="kwd">try</span><span class="pln"> discriminate</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+weakness grass = fire -&gt; grass = grass
+  </div>
+</pre>
+
+<p>Let's use this theorem from the last section again. <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> took care
+of the other two subgoals, and we know that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> can solve this one. In
+other words, we apply either <code class="prettyprint lang- prettyprinted" style=""><span class="pln">discriminate</span></code> or <code class="prettyprint lang- prettyprinted" style=""><span class="pln">trivial</span></code> to the subgoals 
+generated by <code class="prettyprint lang- prettyprinted" style=""><span class="pln">destruct e</span></code>, so we can use <code class="prettyprint lang- prettyprinted" style=""><span class="pun">||</span></code> to shorten the proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> fire_weak_implies_grass </span><span class="pun">:</span><span class="pln"> 
+  forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+    weakness e </span><span class="pun">=</span><span class="pln"> fire </span><span class="pun">-&gt;</span><span class="pln"> e </span><span class="pun">=</span><span class="pln"> grass</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">;</span><span class="pln"> discriminate </span><span class="pun">||</span><span class="pln"> trivial</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">No more subgoals.
+  </div>
+</pre>
+
+<p><br>
+<br></p>
+<p><a name="all"></a></p>
+<h3>all:</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">all</span><span class="pun">:</span></code> tactical applies a tactic to all the remaining subgoals in the 
+proof.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Theorem</span><span class="pln"> fire_weak_implies_grass </span><span class="pun">:</span><span class="pln"> 
+  forall </span><span class="pun">(</span><span class="pln">e </span><span class="pun">:</span><span class="pln"> element</span><span class="pun">),</span><span class="pln">
+    weakness e </span><span class="pun">=</span><span class="pln"> fire </span><span class="pun">-&gt;</span><span class="pln"> e </span><span class="pun">=</span><span class="pln"> grass</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  destruct e</span><span class="pun">.</span><span class="pln">
+  all</span><span class="pun">:</span><span class="pln"> discriminate </span><span class="pun">||</span><span class="pln"> trivial</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+-------------------(1/1)
+weakness grass = fire -&gt; grass = grass
+  </div>
+</pre>
+
+<p>An alternative proof for the previous theorem using <code class="prettyprint lang- prettyprinted" style=""><span class="pln">all</span><span class="pun">:</span></code>.</p>
+<p><br>
+<br></p>
+<p><a name="repeat"></a></p>
+<h3>repeat</h3>
+<p>The <code class="prettyprint lang- prettyprinted" style=""><span class="pln">repeat</span></code> tactical repeatedly applies a tactic until it fails.</p>
+<p>Note that <code class="prettyprint lang- prettyprinted" style=""><span class="pln">repeat</span></code> will never fail, even if it applies the given tactic zero 
+times.</p>
+<p><strong>Example:</strong></p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Require</span><span class="pln"> </span><span class="typ">Import</span><span class="pln"> </span><span class="typ">Arith</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> add_assoc_4 </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">a b c d </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">a </span><span class="pun">+</span><span class="pln"> b </span><span class="pun">+</span><span class="pln"> c</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> d </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="pln">b </span><span class="pun">+</span><span class="pln"> c </span><span class="pun">+</span><span class="pln"> d</span><span class="pun">).</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+a, b, c, d : nat
+-------------------(1/1)
+a + b + c + d = a + (b + c + d)
+  </div>
+</pre>
+
+<p>Coq provides a theorem 
+<code class="prettyprint lang- prettyprinted" style=""><span class="typ">Nat</span><span class="pun">.</span><span class="pln">add_assoc </span><span class="pun">:</span><span class="pln"> forall n m p </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">,</span><span class="pln"> n </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="pln">m </span><span class="pun">+</span><span class="pln"> p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> n </span><span class="pun">+</span><span class="pln"> m </span><span class="pun">+</span><span class="pln"> p</span></code>
+in the <code class="prettyprint lang- prettyprinted" style=""><span class="typ">Arith</span></code> library that we can make use of two times for this proof.</p>
+<pre class="example">  <code class="prettyprint lang-coq code prettyprinted" style=""><span class="typ">Require</span><span class="pln"> </span><span class="typ">Import</span><span class="pln"> </span><span class="typ">Arith</span><span class="pun">.</span><span class="pln">
+
+</span><span class="typ">Theorem</span><span class="pln"> add_assoc_4 </span><span class="pun">:</span><span class="pln"> forall </span><span class="pun">(</span><span class="pln">a b c d </span><span class="pun">:</span><span class="pln"> nat</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">(</span><span class="pln">a </span><span class="pun">+</span><span class="pln"> b </span><span class="pun">+</span><span class="pln"> c</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> d </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="pln">b </span><span class="pun">+</span><span class="pln"> c </span><span class="pun">+</span><span class="pln"> d</span><span class="pun">).</span><span class="pln">
+</span><span class="typ">Proof</span><span class="pun">.</span><span class="pln">
+  intros</span><span class="pun">.</span><span class="pln">
+  repeat rewrite </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">Nat</span><span class="pun">.</span><span class="pln">add_assoc</span><span class="pun">.</span><span class="pln">
+  </span></code>
+  <div class="context">1 subgoal
+a, b, c, d : nat
+-------------------(1/1)
+a + b + c + d = a + b + c + d
+  </div>
+</pre>
+
+
+<p><br>
+<br></p>
+<hr>
+<p><strong>Acknowledgement:</strong> Inspired by the <a href="https://pjreddie.com/coq-tactics/">Coq Tactic Index</a> by Joseph
+Redmon.</p>
+</div>
+
+<script src="./3110 Coq Tactics Cheatsheet_files/strapdown.js.baixados"></script>
+<script src="./3110 Coq Tactics Cheatsheet_files/MathJax.js.baixados"></script>
+
+
+
+</body></html>

@@ -396,12 +396,39 @@ Proof.
     intros. rewrite H. reflexivity.
 Qed.
 
+Lemma succ_all_eq_succ_one: forall n m : nat,
+    S(n + m) = (S n) + m.
+Proof.
+    intros. simpl. reflexivity. 
+Qed.
+
+Lemma succ_minus_eq_succ_positive: forall n m : nat,
+    S(n - m) = (S n) - m.
+Proof.
+    intros. induction n as [|k].
+    - simpl. 
+Qed.
+
+Lemma exist_nat_equal: forall b c : nat,
+    exists m : nat, m = (b - c).
+Proof.
+    intros. induction b as [|k]. 
+    - exists O. simpl. reflexivity.
+    - destruct IHk. apply add_one_both_sides in H.
+        simpl in H. symmetry in H. 
+        apply succ_all_eq_succ_one in H.     
+Qed.
+
+
 Lemma add_sub_order: forall a b c : nat,
     a + b - c =  a + (b - c).
 Proof.
     intros. induction a as [|k].
     - simpl. reflexivity.
-    - rewrite
+    - apply add_one_both_sides in IHk as H. simpl in H.
+        symmetry in H. symmetry.
+        apply X in H.
+        apply succ_all_eq_succ_one in H. 
 Qed.
 
 Lemma less_one_both_sides: forall n m : nat,
