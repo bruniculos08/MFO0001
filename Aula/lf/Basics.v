@@ -912,6 +912,9 @@ Fixpoint leb (n m : nat) : bool :=
       end
   end.
 
+Check eqb.
+Check leb.
+
 Example test_leb1:                leb 2 2 = true.
 Proof. simpl. reflexivity.  Qed.
 Example test_leb2:                leb 2 4 = true.
@@ -948,7 +951,8 @@ Definition ltb (n m : nat) : bool
 
 Notation "x <? y" := (ltb x y) (at level 70) : nat_scope.
 
-Example test_ltb1:             (ltb 2 2) = false.
+Example test_ltb1:             
+  (ltb 2 2) = false.
 (* FILL IN HERE *) Admitted.
 Example test_ltb2:             (ltb 2 4) = true.
 (* FILL IN HERE *) Admitted.
@@ -1111,8 +1115,14 @@ Proof.
 Theorem plus_id_exercise : forall n m o : nat,
   n = m -> m = o -> n + m = m + o.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite H. rewrite H0. reflexivity.
+Qed.
 (** [] *)
+
+Example zero_plus_zero:
+  O + O = O.
+  simpl. reflexivity.
+Qed.
 
 (** The [Admitted] command tells Coq that we want to skip trying
     to prove this theorem and just accept it as a given.  This can be
@@ -1159,7 +1169,10 @@ Proof.
 Theorem mult_n_1 : forall p : nat,
   p * 1 = p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction p as [|k].
+  - simpl. reflexivity.
+  - simpl. rewrite IHk. reflexivity.
+Qed.
 
 (** [] *)
 

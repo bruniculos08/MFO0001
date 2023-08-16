@@ -1,4 +1,6 @@
 Module tutorial.
+From Coq Require Import Unicode.Utf8.
+
 Inductive bool :=
     |true
     |false.
@@ -164,7 +166,7 @@ Fixpoint div(a b : nat) : nat :=
     | true => O
     | false => match a, b with
             | O, O => O
-            | n, S O => S n
+            | n, S O => n
             | S n, O => O
             | O, S m => O
             | S n, S m => S (div (sub n m) (S m))
@@ -173,7 +175,7 @@ Fixpoint div(a b : nat) : nat :=
 
 Compute div (S(S O)) (S(S O)).
 
-Lemma aux_com_sum:forall a b: nat,
+Lemma aux_com_sum: forall a b: nat,
     sum a (S b) = S (sum a b).
 Proof.
     intros. induction a as [| H].
@@ -494,71 +496,45 @@ Proof.
         + simpl. reflexivity.
 Qed.
 
-Lemma div_per_one: forall a : nat,
-    (S a)/(S O) = (S a).
+Lemma div_both_sides: forall a b c: nat,
+    (a = b) -> (a/c = b/c).
 Proof.
-    intros. destruct a.
+    intros. rewrite H. reflexivity.
 Qed.
 
-Lemma div_by_one_succ_eq_div_plus_one: forall a b: nat,
-    (a + b) / (S O) = a + b.
-Proof.
-    intros.
-Qed.
-
-
-Lemma dist_div_one: forall a b : nat,
-    (a + b)/(S O) = (a/(S O)) + (b/(S O)).
+Lemma zero_div: forall a : nat,
+    O / a = O.
 Proof.
     intros. induction a as [|k].
     - simpl. reflexivity.
-    - rewrite succ_eq_plus_one.  
+    - simpl. reflexivity. 
 Qed.
 
-Lemma sum_frac_same_numerator: forall a b c : nat,
-    (a / (S c)) + (b / (S c)) = (a+b)/(S c).
+Lemma div_itself: forall n : nat, 
+    (n <> O) -> (n/n = (S O)).
 Proof.
-    intros. induction c as [|k].
-    - rewrite div_
+    intro. apply contra_pos.
 Qed.
 
-Lemma comutativity_mult_div: forall a b c : nat,
-    (a*b)/c = a*(b/c).
+Lemma div_same_result: forall a b : nat,
+    (S a)/(S a) = (S b)/(S b).
 Proof.
     intros. induction a as [|k].
-    - rewrite mult_per_zero_left. rewrite mult_per_zero_left.
-        destruct c.
-        -- simpl. reflexivity.
-        -- simpl. reflexivity.
-    - simpl (S k * (b/c)). symmetry. rewrite comutativity_mult.
-        symmetry in IHk. rewrite comutativity_mult. rewrite IHk.
-        rewrite mult_k_mais_um_left. rewrite <- mult_k_mais_um_left.
-        simpl.
-        
-Qed.
-
-Theorem frac_div: forall n m : nat,
-    n/m = n * ((S O)/m).
-Proof.
-    intros. destruct n, m.
-    - simpl. reflexivity.
-    - simpl. reflexivity.
-    - simpl. rewrite mult_per_zero_right. simpl. reflexivity.
-    - 
-Qed.
-
-
-Theorem division_principal: forall a b c : nat,
-    (a/b) = c <-> a = (b*c).
-Proof.
-    split.
-    - intros. rewrite <- H.
-    
+    - destruct b.
 Qed.
 
 
 (* contradict serve para mostrar que uma hipótese é falsa, e
     logo se ela é falsa se tem qualquer coisa *)
+
+Lemma div_eq_div_succs: forall a : nat,
+    (S a)/(S a) = S O -> (S (S a))/(S (S a)) = S O.
+Proof.
+    intros. induction a as [|k].
+    - simpl. reflexivity.
+    - rewrite <- H.
+Qed.
+
 
 Lemma div_eq_one: forall n: nat,
     (S n)/(S n) = (S O).
@@ -567,15 +543,6 @@ Proof.
     - simpl. reflexivity.
     - rewrite <- IHk.
         
-Qed.
-
-Lemma div_itself: forall n : nat, 
-    n <> O -> n/n = (S O).
-Proof.
-    intros. destruct n. 
-    - destruct H. reflexivity.
-    - destruct n.
-         
 Qed.
 
 Lemma mult_div_without_change: forall a k : nat,
