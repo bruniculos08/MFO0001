@@ -125,7 +125,7 @@ Compute mult (S (S O)) (S (S (S O))).
 Fixpoint sub(a b : nat) : nat :=
     match a, b with
     | S n, S m => sub n m
-    | a, b => a
+    | _, _ => a
     end.
 
 Compute sub (S O)  O.

@@ -946,19 +946,35 @@ Proof. simpl. reflexivity.  Qed.
     function.  (It can be done with just one previously defined
     function, but you can use two if you want.) *)
 
-Definition ltb (n m : nat) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition ltb (n m : nat) : bool :=
+  match n, m with
+  | O, O => false
+  | S n', O => false
+  | O, S m' => true
+  | S n', S m' => leb (S n') m'
+  end. 
 
 Notation "x <? y" := (ltb x y) (at level 70) : nat_scope.
 
 Example test_ltb1:             
   (ltb 2 2) = false.
-(* FILL IN HERE *) Admitted.
-Example test_ltb2:             (ltb 2 4) = true.
-(* FILL IN HERE *) Admitted.
-Example test_ltb3:             (ltb 4 2) = false.
-(* FILL IN HERE *) Admitted.
-(** [] *)
+  Proof.
+    simpl.
+    reflexivity.
+  Qed.
+Example test_ltb2:             
+  (ltb 2 4) = true.
+  Proof.
+      simpl.
+      reflexivity.
+  Qed.
+Example test_ltb3:             
+  (ltb 4 2) = false.
+  Proof.
+    simpl.
+    reflexivity.
+  Qed.
+  (** [] *)
 
 (* ################################################################# *)
 (** * Proof by Simplification *)
@@ -1370,7 +1386,12 @@ Qed.
 Theorem andb_true_elim2 : forall b c : bool,
   andb b c = true -> c = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  destruct b.
+  - simpl in H. apply H.
+  - simpl in H. discriminate H.
+Qed.
+
 (** [] *)
 
 (** Before closing the chapter, let's mention one final
@@ -1411,7 +1432,10 @@ Qed.
 Theorem zero_nbeq_plus_1 : forall n : nat,
   0 =? (n + 1) = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct n.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+Qed.
 (** [] *)
 
 (* ================================================================= *)
@@ -1515,7 +1539,8 @@ Theorem identity_fn_applied_twice :
   (forall (x : bool), f x = x) ->
   forall (b : bool), f (f b) = b.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite H. rewrite H. reflexivity.
+Qed.
 
 (** [] *)
 
@@ -1545,7 +1570,10 @@ Theorem andb_eq_orb :
   (andb b c = orb b c) ->
   b = c.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct b.
+  - simpl in H. symmetry in H. apply H.
+  - simpl in H. apply H.
+Qed.
 
 (** [] *)
 
