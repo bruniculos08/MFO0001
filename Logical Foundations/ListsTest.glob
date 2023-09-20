@@ -14,7 +14,7 @@ R679:683 LF.ListsTest Check <> mod
 R710:714 LF.Lists <> <> lib
 def 732:740 <> Unnamed_thm
 R737:740 Coq.Init.Logic <> True ind
-R900:922 LF.Lists NatList snd_fst_is_swap prfax
+R900:922 LF.Lists NatList snd_fst_is_swap thm
 R938:952 LF.Lists NatList natprod ind
 R1000:1002 Coq.Init.Logic <> ::type_scope:x_'='_x not
 R956:967 LF.Lists NatList pair constr
@@ -24,7 +24,7 @@ R970:980 LF.Lists NatList snd def
 R982:982 LF.ListsTest <> p var
 R1003:1019 LF.Lists NatList swap_pair def
 R1021:1021 LF.ListsTest <> p var
-R900:922 LF.Lists NatList snd_fst_is_swap prfax
+R900:922 LF.Lists NatList snd_fst_is_swap thm
 R938:952 LF.Lists NatList natprod ind
 R1000:1002 Coq.Init.Logic <> ::type_scope:x_'='_x not
 R956:967 LF.Lists NatList pair constr
@@ -34,12 +34,12 @@ R970:980 LF.Lists NatList snd def
 R982:982 LF.ListsTest <> p var
 R1003:1019 LF.Lists NatList swap_pair def
 R1021:1021 LF.ListsTest <> p var
-R1073:1095 LF.Lists NatList snd_fst_is_swap prfax
+R1073:1095 LF.Lists NatList snd_fst_is_swap thm
 def 1098:1106 <> Unnamed_thm
 R1103:1106 Coq.Init.Logic <> True ind
-R1271:1291 LF.Lists NatList test_nonzeros prfax
+R1271:1291 LF.Lists NatList test_nonzeros ex
 R1488:1491 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1296:1311 LF.Lists NatList nonzeros prfax
+R1296:1311 LF.Lists NatList nonzeros def
 R1317:1328 LF.Lists NatList cons constr
 R1339:1350 LF.Lists NatList cons constr
 R1364:1375 LF.Lists NatList cons constr
@@ -52,9 +52,9 @@ R1492:1503 LF.Lists NatList cons constr
 R1508:1519 LF.Lists NatList cons constr
 R1524:1535 LF.Lists NatList cons constr
 R1539:1549 LF.Lists NatList nil constr
-R1271:1291 LF.Lists NatList test_nonzeros prfax
+R1271:1291 LF.Lists NatList test_nonzeros ex
 R1488:1491 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1296:1311 LF.Lists NatList nonzeros prfax
+R1296:1311 LF.Lists NatList nonzeros def
 R1317:1328 LF.Lists NatList cons constr
 R1339:1350 LF.Lists NatList cons constr
 R1364:1375 LF.Lists NatList cons constr
@@ -67,12 +67,12 @@ R1492:1503 LF.Lists NatList cons constr
 R1508:1519 LF.Lists NatList cons constr
 R1524:1535 LF.Lists NatList cons constr
 R1539:1549 LF.Lists NatList nil constr
-R1603:1623 LF.Lists NatList test_nonzeros prfax
+R1603:1623 LF.Lists NatList test_nonzeros ex
 def 1626:1634 <> Unnamed_thm
 R1631:1634 Coq.Init.Logic <> True ind
-R1727:1749 LF.Lists NatList test_oddmembers prfax
+R1727:1749 LF.Lists NatList test_oddmembers ex
 R1948:1951 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1754:1771 LF.Lists NatList oddmembers prfax
+R1754:1771 LF.Lists NatList oddmembers def
 R1777:1788 LF.Lists NatList cons constr
 R1799:1810 LF.Lists NatList cons constr
 R1824:1835 LF.Lists NatList cons constr
@@ -84,9 +84,9 @@ R1930:1940 LF.Lists NatList nil constr
 R1952:1963 LF.Lists NatList cons constr
 R1968:1979 LF.Lists NatList cons constr
 R1983:1993 LF.Lists NatList nil constr
-R1727:1749 LF.Lists NatList test_oddmembers prfax
+R1727:1749 LF.Lists NatList test_oddmembers ex
 R1948:1951 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1754:1771 LF.Lists NatList oddmembers prfax
+R1754:1771 LF.Lists NatList oddmembers def
 R1777:1788 LF.Lists NatList cons constr
 R1799:1810 LF.Lists NatList cons constr
 R1824:1835 LF.Lists NatList cons constr
@@ -98,40 +98,40 @@ R1930:1940 LF.Lists NatList nil constr
 R1952:1963 LF.Lists NatList cons constr
 R1968:1979 LF.Lists NatList cons constr
 R1983:1993 LF.Lists NatList nil constr
-R2046:2068 LF.Lists NatList test_oddmembers prfax
+R2046:2068 LF.Lists NatList test_oddmembers ex
 def 2071:2079 <> Unnamed_thm
 R2076:2079 Coq.Init.Logic <> True ind
-R2178:2206 LF.Lists NatList test_countoddmembers2 prfax
+R2178:2206 LF.Lists NatList test_countoddmembers2 ex
 R2300:2302 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2211:2233 LF.Lists NatList countoddmembers prfax
+R2211:2233 LF.Lists NatList countoddmembers def
 R2239:2250 LF.Lists NatList cons constr
 R2255:2266 LF.Lists NatList cons constr
 R2271:2282 LF.Lists NatList cons constr
 R2286:2296 LF.Lists NatList nil constr
-R2178:2206 LF.Lists NatList test_countoddmembers2 prfax
+R2178:2206 LF.Lists NatList test_countoddmembers2 ex
 R2300:2302 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2211:2233 LF.Lists NatList countoddmembers prfax
+R2211:2233 LF.Lists NatList countoddmembers def
 R2239:2250 LF.Lists NatList cons constr
 R2255:2266 LF.Lists NatList cons constr
 R2271:2282 LF.Lists NatList cons constr
 R2286:2296 LF.Lists NatList nil constr
-R2355:2383 LF.Lists NatList test_countoddmembers2 prfax
+R2355:2383 LF.Lists NatList test_countoddmembers2 ex
 def 2386:2394 <> Unnamed_thm
 R2391:2394 Coq.Init.Logic <> True ind
-R2493:2521 LF.Lists NatList test_countoddmembers3 prfax
+R2493:2521 LF.Lists NatList test_countoddmembers3 ex
 R2560:2562 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2525:2547 LF.Lists NatList countoddmembers prfax
+R2525:2547 LF.Lists NatList countoddmembers def
 R2549:2559 LF.Lists NatList nil constr
-R2493:2521 LF.Lists NatList test_countoddmembers3 prfax
+R2493:2521 LF.Lists NatList test_countoddmembers3 ex
 R2560:2562 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2525:2547 LF.Lists NatList countoddmembers prfax
+R2525:2547 LF.Lists NatList countoddmembers def
 R2549:2559 LF.Lists NatList nil constr
-R2615:2643 LF.Lists NatList test_countoddmembers3 prfax
+R2615:2643 LF.Lists NatList test_countoddmembers3 ex
 def 2646:2654 <> Unnamed_thm
 R2651:2654 Coq.Init.Logic <> True ind
-R2837:2859 LF.Lists NatList test_alternate1 prfax
+R2837:2859 LF.Lists NatList test_alternate1 ex
 R3013:3016 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2864:2880 LF.Lists NatList alternate prfax
+R2864:2880 LF.Lists NatList alternate def
 R2952:2963 LF.Lists NatList cons constr
 R2968:2979 LF.Lists NatList cons constr
 R2984:2995 LF.Lists NatList cons constr
@@ -147,9 +147,9 @@ R3083:3094 LF.Lists NatList cons constr
 R3099:3110 LF.Lists NatList cons constr
 R3115:3126 LF.Lists NatList cons constr
 R3130:3140 LF.Lists NatList nil constr
-R2837:2859 LF.Lists NatList test_alternate1 prfax
+R2837:2859 LF.Lists NatList test_alternate1 ex
 R3013:3016 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2864:2880 LF.Lists NatList alternate prfax
+R2864:2880 LF.Lists NatList alternate def
 R2952:2963 LF.Lists NatList cons constr
 R2968:2979 LF.Lists NatList cons constr
 R2984:2995 LF.Lists NatList cons constr
@@ -165,12 +165,12 @@ R3083:3094 LF.Lists NatList cons constr
 R3099:3110 LF.Lists NatList cons constr
 R3115:3126 LF.Lists NatList cons constr
 R3130:3140 LF.Lists NatList nil constr
-R3197:3219 LF.Lists NatList test_alternate1 prfax
+R3197:3219 LF.Lists NatList test_alternate1 ex
 def 3222:3230 <> Unnamed_thm
 R3227:3230 Coq.Init.Logic <> True ind
-R3339:3361 LF.Lists NatList test_alternate2 prfax
+R3339:3361 LF.Lists NatList test_alternate2 ex
 R3478:3481 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3366:3382 LF.Lists NatList alternate prfax
+R3366:3382 LF.Lists NatList alternate def
 R3417:3428 LF.Lists NatList cons constr
 R3433:3444 LF.Lists NatList cons constr
 R3449:3460 LF.Lists NatList cons constr
@@ -182,9 +182,9 @@ R3501:3512 LF.Lists NatList cons constr
 R3517:3528 LF.Lists NatList cons constr
 R3533:3544 LF.Lists NatList cons constr
 R3548:3558 LF.Lists NatList nil constr
-R3339:3361 LF.Lists NatList test_alternate2 prfax
+R3339:3361 LF.Lists NatList test_alternate2 ex
 R3478:3481 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3366:3382 LF.Lists NatList alternate prfax
+R3366:3382 LF.Lists NatList alternate def
 R3417:3428 LF.Lists NatList cons constr
 R3433:3444 LF.Lists NatList cons constr
 R3449:3460 LF.Lists NatList cons constr
@@ -196,12 +196,12 @@ R3501:3512 LF.Lists NatList cons constr
 R3517:3528 LF.Lists NatList cons constr
 R3533:3544 LF.Lists NatList cons constr
 R3548:3558 LF.Lists NatList nil constr
-R3613:3635 LF.Lists NatList test_alternate2 prfax
+R3613:3635 LF.Lists NatList test_alternate2 ex
 def 3638:3646 <> Unnamed_thm
 R3643:3646 Coq.Init.Logic <> True ind
-R3755:3777 LF.Lists NatList test_alternate4 prfax
+R3755:3777 LF.Lists NatList test_alternate4 ex
 R3862:3865 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3782:3798 LF.Lists NatList alternate prfax
+R3782:3798 LF.Lists NatList alternate def
 R3816:3827 LF.Lists NatList cons constr
 R3833:3844 LF.Lists NatList cons constr
 R3849:3859 LF.Lists NatList nil constr
@@ -209,9 +209,9 @@ R3800:3810 LF.Lists NatList nil constr
 R3866:3877 LF.Lists NatList cons constr
 R3883:3894 LF.Lists NatList cons constr
 R3899:3909 LF.Lists NatList nil constr
-R3755:3777 LF.Lists NatList test_alternate4 prfax
+R3755:3777 LF.Lists NatList test_alternate4 ex
 R3862:3865 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3782:3798 LF.Lists NatList alternate prfax
+R3782:3798 LF.Lists NatList alternate def
 R3816:3827 LF.Lists NatList cons constr
 R3833:3844 LF.Lists NatList cons constr
 R3849:3859 LF.Lists NatList nil constr
@@ -219,7 +219,7 @@ R3800:3810 LF.Lists NatList nil constr
 R3866:3877 LF.Lists NatList cons constr
 R3883:3894 LF.Lists NatList cons constr
 R3899:3909 LF.Lists NatList nil constr
-R3962:3984 LF.Lists NatList test_alternate4 prfax
+R3962:3984 LF.Lists NatList test_alternate4 ex
 def 3987:3995 <> Unnamed_thm
 R3992:3995 Coq.Init.Logic <> True ind
 R4162:4180 LF.Lists NatList test_count2 prfax
@@ -450,26 +450,26 @@ R7396:7399 Coq.Init.Logic <> True ind
 R7487:7506 LF.Lists NatList nonzeros_app prfax
 R7526:7540 LF.Lists NatList natlist ind
 R7580:7583 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7544:7559 LF.Lists NatList nonzeros prfax
+R7544:7559 LF.Lists NatList nonzeros def
 R7562:7572 LF.Lists NatList app def
 R7577:7578 LF.ListsTest <> l2 var
 R7574:7575 LF.ListsTest <> l1 var
 R7584:7594 LF.Lists NatList app def
-R7619:7634 LF.Lists NatList nonzeros prfax
+R7619:7634 LF.Lists NatList nonzeros def
 R7636:7637 LF.ListsTest <> l2 var
-R7597:7612 LF.Lists NatList nonzeros prfax
+R7597:7612 LF.Lists NatList nonzeros def
 R7614:7615 LF.ListsTest <> l1 var
 R7487:7506 LF.Lists NatList nonzeros_app prfax
 R7526:7540 LF.Lists NatList natlist ind
 R7580:7583 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7544:7559 LF.Lists NatList nonzeros prfax
+R7544:7559 LF.Lists NatList nonzeros def
 R7562:7572 LF.Lists NatList app def
 R7577:7578 LF.ListsTest <> l2 var
 R7574:7575 LF.ListsTest <> l1 var
 R7584:7594 LF.Lists NatList app def
-R7619:7634 LF.Lists NatList nonzeros prfax
+R7619:7634 LF.Lists NatList nonzeros def
 R7636:7637 LF.ListsTest <> l2 var
-R7597:7612 LF.Lists NatList nonzeros prfax
+R7597:7612 LF.Lists NatList nonzeros def
 R7614:7615 LF.ListsTest <> l1 var
 R7690:7709 LF.Lists NatList nonzeros_app prfax
 def 7712:7720 <> Unnamed_thm
@@ -726,11 +726,11 @@ R11148:11152 LF.Basics <> false constr
 R11274:11294 LF.Lists PartialMap update_neq prfax
 def 11297:11305 <> Unnamed_thm
 R11302:11305 Coq.Init.Logic <> True ind
-R12289:12311 LF.Lists NatList snd_fst_is_swap prfax
-R12384:12404 LF.Lists NatList test_nonzeros prfax
-R12479:12501 LF.Lists NatList test_oddmembers prfax
-R12582:12610 LF.Lists NatList test_countoddmembers2 prfax
-R12691:12719 LF.Lists NatList test_countoddmembers3 prfax
+R12289:12311 LF.Lists NatList snd_fst_is_swap thm
+R12384:12404 LF.Lists NatList test_nonzeros ex
+R12479:12501 LF.Lists NatList test_oddmembers ex
+R12582:12610 LF.Lists NatList test_countoddmembers2 ex
+R12691:12719 LF.Lists NatList test_countoddmembers3 ex
 R12790:12808 LF.Lists NatList test_count2 prfax
 R12877:12893 LF.Lists NatList test_sum1 prfax
 R12962:12978 LF.Lists NatList test_add1 prfax
@@ -749,9 +749,9 @@ R14123:14144 LF.Lists NatList test_hd_error2 prfax
 R14207:14217 LF.Lists <> eqb_id_refl prfax
 R14289:14308 LF.Lists PartialMap update_eq prfax
 R14381:14401 LF.Lists PartialMap update_neq prfax
-R14526:14548 LF.Lists NatList test_alternate1 prfax
-R14623:14645 LF.Lists NatList test_alternate2 prfax
-R14720:14742 LF.Lists NatList test_alternate4 prfax
+R14526:14548 LF.Lists NatList test_alternate1 ex
+R14623:14645 LF.Lists NatList test_alternate2 ex
+R14720:14742 LF.Lists NatList test_alternate4 ex
 R14832:14869 LF.Lists NatList remove_does_not_increase_count prfax
 R14949:14976 LF.Lists NatList involution_injective prfax
 R15049:15069 LF.Lists NatList rev_injective prfax

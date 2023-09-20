@@ -549,8 +549,9 @@ Fixpoint split' {X Y : Type} (l : list (X*Y)) : (list X) * (list Y) :=
 Example test_split:
   split [(1,false);(2,false)] = ([1;2],[false;false]).
 Proof.
-(* FILL IN HERE *) Admitted.
-(** [] *)
+  simpl.
+  reflexivity.
+Qed.
 
 (* ================================================================= *)
 (** ** Polymorphic Options *)
@@ -1061,7 +1062,9 @@ Definition prod_curry {X Y Z : Type}
     the theorems below to show that the two are inverses. *)
 
 Definition prod_uncurry {X Y Z : Type}
-  (f : X -> Y -> Z) (p : X * Y) : Z
+  (f : X -> Y -> Z) (p : X * Y) : Z :=
+  f fst(p) * snd(p). 
+
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 (** As a (trivial) example of the usefulness of currying, we can use it

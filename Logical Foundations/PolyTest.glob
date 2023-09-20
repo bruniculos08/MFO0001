@@ -14,7 +14,7 @@ R678:682 LF.PolyTest Check <> mod
 R709:712 LF.Poly <> <> lib
 def 730:738 <> Unnamed_thm
 R735:738 Coq.Init.Logic <> True ind
-R885:893 LF.Poly <> app_nil_r prfax
+R885:893 LF.Poly <> app_nil_r thm
 R920:923 LF.Poly <> list ind
 R925:925 LF.PolyTest <> X var
 R937:939 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -22,7 +22,7 @@ R930:933 LF.Poly <> :::x_'++'_x not
 R929:929 LF.PolyTest <> l var
 R934:936 LF.Poly <> :::'['_']' not
 R940:940 LF.PolyTest <> l var
-R885:893 LF.Poly <> app_nil_r prfax
+R885:893 LF.Poly <> app_nil_r thm
 R920:923 LF.Poly <> list ind
 R925:925 LF.PolyTest <> X var
 R937:939 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -30,10 +30,10 @@ R930:933 LF.Poly <> :::x_'++'_x not
 R929:929 LF.PolyTest <> l var
 R934:936 LF.Poly <> :::'['_']' not
 R940:940 LF.PolyTest <> l var
-R992:1000 LF.Poly <> app_nil_r prfax
+R992:1000 LF.Poly <> app_nil_r thm
 def 1003:1011 <> Unnamed_thm
 R1008:1011 Coq.Init.Logic <> True ind
-R1088:1096 LF.Poly <> app_assoc prfax
+R1088:1096 LF.Poly <> app_assoc thm
 R1127:1130 LF.Poly <> list ind
 R1132:1132 LF.PolyTest <> A var
 R1147:1149 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -48,7 +48,7 @@ R1152:1155 LF.Poly <> :::x_'++'_x not
 R1151:1151 LF.PolyTest <> l var
 R1156:1156 LF.PolyTest <> m var
 R1162:1162 LF.PolyTest <> n var
-R1088:1096 LF.Poly <> app_assoc prfax
+R1088:1096 LF.Poly <> app_assoc thm
 R1127:1130 LF.Poly <> list ind
 R1132:1132 LF.PolyTest <> A var
 R1147:1149 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -63,10 +63,10 @@ R1152:1155 LF.Poly <> :::x_'++'_x not
 R1151:1151 LF.PolyTest <> l var
 R1156:1156 LF.PolyTest <> m var
 R1162:1162 LF.PolyTest <> n var
-R1214:1222 LF.Poly <> app_assoc prfax
+R1214:1222 LF.Poly <> app_assoc thm
 def 1225:1233 <> Unnamed_thm
 R1230:1233 Coq.Init.Logic <> True ind
-R1313:1322 LF.Poly <> app_length prfax
+R1313:1322 LF.Poly <> app_length thm
 R1354:1357 LF.Poly <> list ind
 R1359:1359 LF.PolyTest <> X var
 R1384:1386 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -82,7 +82,7 @@ R1395:1395 LF.PolyTest <> X var
 R1403:1408 LF.Poly <> length def
 R1412:1413 LF.PolyTest <> l2 var
 R1410:1410 LF.PolyTest <> X var
-R1313:1322 LF.Poly <> app_length prfax
+R1313:1322 LF.Poly <> app_length thm
 R1354:1357 LF.Poly <> list ind
 R1359:1359 LF.PolyTest <> X var
 R1384:1386 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -98,10 +98,10 @@ R1395:1395 LF.PolyTest <> X var
 R1403:1408 LF.Poly <> length def
 R1412:1413 LF.PolyTest <> l2 var
 R1410:1410 LF.PolyTest <> X var
-R1465:1474 LF.Poly <> app_length prfax
+R1465:1474 LF.Poly <> app_length thm
 def 1477:1485 <> Unnamed_thm
 R1482:1485 Coq.Init.Logic <> True ind
-R1650:1662 LF.Poly <> rev_app_distr prfax
+R1650:1662 LF.Poly <> rev_app_distr thm
 R1694:1697 LF.Poly <> list ind
 R1699:1699 LF.PolyTest <> X var
 R1721:1723 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -117,7 +117,7 @@ R1729:1729 LF.PolyTest <> X var
 R1738:1740 LF.Poly <> rev def
 R1744:1745 LF.PolyTest <> l1 var
 R1742:1742 LF.PolyTest <> X var
-R1650:1662 LF.Poly <> rev_app_distr prfax
+R1650:1662 LF.Poly <> rev_app_distr thm
 R1694:1697 LF.Poly <> list ind
 R1699:1699 LF.PolyTest <> X var
 R1721:1723 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -133,10 +133,10 @@ R1729:1729 LF.PolyTest <> X var
 R1738:1740 LF.Poly <> rev def
 R1744:1745 LF.PolyTest <> l1 var
 R1742:1742 LF.PolyTest <> X var
-R1797:1809 LF.Poly <> rev_app_distr prfax
+R1797:1809 LF.Poly <> rev_app_distr thm
 def 1812:1820 <> Unnamed_thm
 R1817:1820 Coq.Init.Logic <> True ind
-R1902:1915 LF.Poly <> rev_involutive prfax
+R1902:1915 LF.Poly <> rev_involutive thm
 R1942:1945 LF.Poly <> list ind
 R1947:1947 LF.PolyTest <> X var
 R1968:1970 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -146,7 +146,7 @@ R1966:1966 LF.PolyTest <> l var
 R1964:1964 LF.PolyTest <> X var
 R1956:1956 LF.PolyTest <> X var
 R1971:1971 LF.PolyTest <> l var
-R1902:1915 LF.Poly <> rev_involutive prfax
+R1902:1915 LF.Poly <> rev_involutive thm
 R1942:1945 LF.Poly <> list ind
 R1947:1947 LF.PolyTest <> X var
 R1968:1970 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -156,10 +156,10 @@ R1966:1966 LF.PolyTest <> l var
 R1964:1964 LF.PolyTest <> X var
 R1956:1956 LF.PolyTest <> X var
 R1971:1971 LF.PolyTest <> l var
-R2023:2036 LF.Poly <> rev_involutive prfax
+R2023:2036 LF.Poly <> rev_involutive thm
 def 2039:2047 <> Unnamed_thm
 R2044:2047 Coq.Init.Logic <> True ind
-R2190:2194 LF.Poly <> split prfax
+R2190:2194 LF.Poly <> split def
 R2229:2232 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R2239:2241 LF.Poly <> ::type_scope:x_'*'_x not
 R2233:2236 LF.Poly <> list ind
@@ -170,7 +170,7 @@ R2217:2220 LF.Poly <> list ind
 R2224:2226 LF.Poly <> ::type_scope:x_'*'_x not
 R2223:2223 LF.PolyTest <> X var
 R2227:2227 LF.PolyTest <> Y var
-R2190:2194 LF.Poly <> split prfax
+R2190:2194 LF.Poly <> split def
 R2229:2232 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R2239:2241 LF.Poly <> ::type_scope:x_'*'_x not
 R2233:2236 LF.Poly <> list ind
@@ -181,12 +181,12 @@ R2217:2220 LF.Poly <> list ind
 R2224:2226 LF.Poly <> ::type_scope:x_'*'_x not
 R2223:2223 LF.PolyTest <> X var
 R2227:2227 LF.PolyTest <> Y var
-R2299:2303 LF.Poly <> split prfax
+R2299:2303 LF.Poly <> split def
 def 2306:2314 <> Unnamed_thm
 R2311:2314 Coq.Init.Logic <> True ind
 R2392:2401 LF.Poly <> test_split prfax
 R2446:2448 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2407:2411 LF.Poly <> split prfax
+R2407:2411 LF.Poly <> split def
 R2422:2422 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R2433:2434 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R2445:2445 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -213,7 +213,7 @@ R2459:2463 LF.Basics <> false constr
 R2466:2470 LF.Basics <> false constr
 R2392:2401 LF.Poly <> test_split prfax
 R2446:2448 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2407:2411 LF.Poly <> split prfax
+R2407:2411 LF.Poly <> split def
 R2422:2422 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R2433:2434 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R2445:2445 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -299,7 +299,7 @@ R3031:3033 LF.Poly <> :::'['_']' not
 R3085:3106 LF.Poly <> test_filter_even_gt7_2 prfax
 def 3109:3117 <> Unnamed_thm
 R3114:3117 Coq.Init.Logic <> True ind
-R3268:3276 LF.Poly <> partition prfax
+R3268:3276 LF.Poly <> partition def
 R3297:3297 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3307:3311 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3318:3321 Coq.Init.Logic <> ::type_scope:x_'->'_x not
@@ -313,7 +313,7 @@ R3317:3317 LF.PolyTest <> X var
 R3299:3302 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3303:3306 LF.Basics <> bool ind
 R3298:3298 LF.PolyTest <> X var
-R3268:3276 LF.Poly <> partition prfax
+R3268:3276 LF.Poly <> partition def
 R3297:3297 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3307:3311 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3318:3321 Coq.Init.Logic <> ::type_scope:x_'->'_x not
@@ -327,12 +327,12 @@ R3317:3317 LF.PolyTest <> X var
 R3299:3302 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R3303:3306 LF.Basics <> bool ind
 R3298:3298 LF.PolyTest <> X var
-R3388:3396 LF.Poly <> partition prfax
+R3388:3396 LF.Poly <> partition def
 def 3399:3407 <> Unnamed_thm
 R3404:3407 Coq.Init.Logic <> True ind
-R3490:3504 LF.Poly <> test_partition1 prfax
+R3490:3504 LF.Poly <> test_partition1 ex
 R3542:3544 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3509:3517 LF.Poly <> partition prfax
+R3509:3517 LF.Poly <> partition def
 R3527:3527 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3529:3530 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3532:3533 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -351,9 +351,9 @@ R3554:3554 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3557:3557 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3559:3560 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3562:3562 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
-R3490:3504 LF.Poly <> test_partition1 prfax
+R3490:3504 LF.Poly <> test_partition1 ex
 R3542:3544 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3509:3517 LF.Poly <> partition prfax
+R3509:3517 LF.Poly <> partition def
 R3527:3527 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3529:3530 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3532:3533 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -372,12 +372,12 @@ R3554:3554 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3557:3557 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3559:3560 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3562:3562 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
-R3615:3629 LF.Poly <> test_partition1 prfax
+R3615:3629 LF.Poly <> test_partition1 ex
 def 3632:3640 <> Unnamed_thm
 R3637:3640 Coq.Init.Logic <> True ind
 R3723:3737 LF.Poly <> test_partition2 prfax
 R3789:3791 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3743:3751 LF.Poly <> partition prfax
+R3743:3751 LF.Poly <> partition def
 R3780:3780 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3782:3783 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3785:3786 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -395,7 +395,7 @@ R3803:3804 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3806:3806 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3723:3737 LF.Poly <> test_partition2 prfax
 R3789:3791 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3743:3751 LF.Poly <> partition prfax
+R3743:3751 LF.Poly <> partition def
 R3780:3780 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3782:3783 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
 R3785:3786 LF.Poly <> :::'['_x_';'_'..'_';'_x_']' not
@@ -865,17 +865,17 @@ R10261:10280 LF.Poly Exercises.Church two def
 R10429:10450 LF.Poly Exercises.Church exp_3 prfax
 def 10453:10461 <> Unnamed_thm
 R10458:10461 Coq.Init.Logic <> True ind
-R11431:11439 LF.Poly <> app_nil_r prfax
-R11500:11508 LF.Poly <> app_assoc prfax
-R11570:11579 LF.Poly <> app_length prfax
-R11644:11656 LF.Poly <> rev_app_distr prfax
-R11722:11735 LF.Poly <> rev_involutive prfax
-R11792:11796 LF.Poly <> split prfax
+R11431:11439 LF.Poly <> app_nil_r thm
+R11500:11508 LF.Poly <> app_assoc thm
+R11570:11579 LF.Poly <> app_length thm
+R11644:11656 LF.Poly <> rev_app_distr thm
+R11722:11735 LF.Poly <> rev_involutive thm
+R11792:11796 LF.Poly <> split def
 R11858:11867 LF.Poly <> test_split prfax
 R11941:11962 LF.Poly <> test_filter_even_gt7_1 prfax
 R12036:12057 LF.Poly <> test_filter_even_gt7_2 prfax
-R12118:12126 LF.Poly <> partition prfax
-R12193:12207 LF.Poly <> test_partition1 prfax
+R12118:12126 LF.Poly <> partition def
+R12193:12207 LF.Poly <> test_partition1 ex
 R12274:12288 LF.Poly <> test_partition2 prfax
 R12347:12353 LF.Poly <> map_rev prfax
 R12413:12420 LF.Poly <> flat_map prfax

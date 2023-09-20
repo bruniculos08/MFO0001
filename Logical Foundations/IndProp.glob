@@ -1089,9 +1089,9 @@ R39991:39992 LF.IndProp <> re var
 R39967:39970 LF.IndProp <> :::x_'=~'_x not
 R39966:39966 LF.IndProp <> s var
 R39971:39972 LF.IndProp <> re var
-R40035:40043 LF.Poly <> app_nil_r prfax
-R40035:40043 LF.Poly <> app_nil_r prfax
-R40035:40043 LF.Poly <> app_nil_r prfax
+R40035:40043 LF.Poly <> app_nil_r thm
+R40035:40043 LF.Poly <> app_nil_r thm
+R40035:40043 LF.Poly <> app_nil_r thm
 R40059:40066 LF.IndProp <> MStarApp constr
 R40059:40066 LF.IndProp <> MStarApp constr
 R40092:40097 LF.IndProp <> MStar0 constr
@@ -1285,9 +1285,9 @@ R47326:47329 LF.IndProp <> Star constr
 R47331:47332 LF.IndProp <> re var
 R47422:47425 LF.IndProp <> Star constr
 R47422:47425 LF.IndProp <> Star constr
-R48347:48355 LF.Poly <> app_assoc prfax
-R48347:48355 LF.Poly <> app_assoc prfax
-R48347:48355 LF.Poly <> app_assoc prfax
+R48347:48355 LF.Poly <> app_assoc thm
+R48347:48355 LF.Poly <> app_assoc thm
+R48347:48355 LF.Poly <> app_assoc thm
 R48368:48375 LF.IndProp <> MStarApp constr
 R48368:48375 LF.IndProp <> MStarApp constr
 prf 48756:48762 <> MStar''
@@ -1408,9 +1408,9 @@ R51515:51515 LF.IndProp <> n var
 R51522:51525 LF.IndProp Pumping napp def
 R51529:51529 LF.IndProp <> l var
 R51527:51527 LF.IndProp <> m var
-R51625:51633 LF.Poly <> app_assoc prfax
-R51625:51633 LF.Poly <> app_assoc prfax
-R51625:51633 LF.Poly <> app_assoc prfax
+R51625:51633 LF.Poly <> app_assoc thm
+R51625:51633 LF.Poly <> app_assoc thm
+R51625:51633 LF.Poly <> app_assoc thm
 prf 51661:51669 Pumping napp_star
 R51698:51704 LF.IndProp <> reg_exp ind
 R51706:51706 LF.IndProp <> T var
@@ -1431,9 +1431,9 @@ R51737:51738 LF.IndProp <> re var
 R51716:51719 LF.IndProp <> :::x_'=~'_x not
 R51714:51715 LF.IndProp <> s1 var
 R51720:51721 LF.IndProp <> re var
-R51872:51880 LF.Poly <> app_assoc prfax
-R51872:51880 LF.Poly <> app_assoc prfax
-R51872:51880 LF.Poly <> app_assoc prfax
+R51872:51880 LF.Poly <> app_assoc thm
+R51872:51880 LF.Poly <> app_assoc thm
+R51872:51880 LF.Poly <> app_assoc thm
 R51893:51900 LF.IndProp <> MStarApp constr
 R51893:51900 LF.IndProp <> MStarApp constr
 prf 52460:52471 Pumping weak_pumping

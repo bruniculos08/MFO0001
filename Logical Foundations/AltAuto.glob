@@ -337,9 +337,9 @@ R13308:13313 LF.IndProp <> MEmpty constr
 R13308:13313 LF.IndProp <> MEmpty constr
 R13345:13349 LF.IndProp <> MChar constr
 R13345:13349 LF.IndProp <> MChar constr
-R13643:13651 LF.Poly <> app_nil_r prfax
-R13643:13651 LF.Poly <> app_nil_r prfax
-R13643:13651 LF.Poly <> app_nil_r prfax
+R13643:13651 LF.Poly <> app_nil_r thm
+R13643:13651 LF.Poly <> app_nil_r thm
+R13643:13651 LF.Poly <> app_nil_r thm
 R13679:13682 LF.IndProp <> MApp constr
 R13679:13682 LF.IndProp <> MApp constr
 R13743:13746 LF.IndProp <> MApp constr
@@ -348,9 +348,9 @@ R13807:13810 LF.IndProp <> MApp constr
 R13807:13810 LF.IndProp <> MApp constr
 R13871:13874 LF.IndProp <> MApp constr
 R13871:13874 LF.IndProp <> MApp constr
-R13995:14003 LF.Poly <> app_nil_r prfax
-R13995:14003 LF.Poly <> app_nil_r prfax
-R13995:14003 LF.Poly <> app_nil_r prfax
+R13995:14003 LF.Poly <> app_nil_r thm
+R13995:14003 LF.Poly <> app_nil_r thm
+R13995:14003 LF.Poly <> app_nil_r thm
 R14032:14035 LF.IndProp <> MApp constr
 R14032:14035 LF.IndProp <> MApp constr
 R14096:14099 LF.IndProp <> MApp constr
@@ -359,9 +359,9 @@ R14160:14163 LF.IndProp <> MApp constr
 R14160:14163 LF.IndProp <> MApp constr
 R14224:14227 LF.IndProp <> MApp constr
 R14224:14227 LF.IndProp <> MApp constr
-R14348:14356 LF.Poly <> app_nil_r prfax
-R14348:14356 LF.Poly <> app_nil_r prfax
-R14348:14356 LF.Poly <> app_nil_r prfax
+R14348:14356 LF.Poly <> app_nil_r thm
+R14348:14356 LF.Poly <> app_nil_r thm
+R14348:14356 LF.Poly <> app_nil_r thm
 R14384:14387 LF.IndProp <> MApp constr
 R14384:14387 LF.IndProp <> MApp constr
 R14448:14451 LF.IndProp <> MApp constr
@@ -370,9 +370,9 @@ R14512:14515 LF.IndProp <> MApp constr
 R14512:14515 LF.IndProp <> MApp constr
 R14576:14579 LF.IndProp <> MApp constr
 R14576:14579 LF.IndProp <> MApp constr
-R14700:14708 LF.Poly <> app_nil_r prfax
-R14700:14708 LF.Poly <> app_nil_r prfax
-R14700:14708 LF.Poly <> app_nil_r prfax
+R14700:14708 LF.Poly <> app_nil_r thm
+R14700:14708 LF.Poly <> app_nil_r thm
+R14700:14708 LF.Poly <> app_nil_r thm
 R14736:14739 LF.IndProp <> MApp constr
 R14736:14739 LF.IndProp <> MApp constr
 R14800:14803 LF.IndProp <> MApp constr
@@ -627,9 +627,9 @@ R22317:22318 LF.IndProp <> ev ind
 R22322:22324 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
 R22321:22321 LF.AltAuto <> n var
 R22325:22325 LF.AltAuto <> n var
-R22406:22413 LF.Induction <> add_comm prfax
-R22406:22413 LF.Induction <> add_comm prfax
-R22406:22413 LF.Induction <> add_comm prfax
+R22406:22413 LF.Induction <> add_comm thm
+R22406:22413 LF.Induction <> add_comm thm
+R22406:22413 LF.Induction <> add_comm thm
 R24618:24620 Coq.micromega.Lia <> <> lib
 prf 24632:24643 <> lia_succeed1
 R24659:24661 Coq.Init.Datatypes <> nat ind

@@ -240,9 +240,9 @@ R15278:15278 LF.IndPrinciples <> n var
 R15350:15356 LF.Induction <> add_0_r thm
 R15350:15356 LF.Induction <> add_0_r thm
 R15350:15356 LF.Induction <> add_0_r thm
-R15440:15448 LF.Induction <> plus_n_Sm prfax
-R15440:15448 LF.Induction <> plus_n_Sm prfax
-R15440:15448 LF.Induction <> plus_n_Sm prfax
+R15440:15448 LF.Induction <> plus_n_Sm thm
+R15440:15448 LF.Induction <> plus_n_Sm thm
+R15440:15448 LF.Induction <> plus_n_Sm thm
 prf 15863:15872 <> add_comm''
 R15889:15891 Coq.Init.Datatypes <> nat ind
 R15901:15903 Coq.Init.Logic <> ::type_scope:x_'='_x not
@@ -255,9 +255,9 @@ R15908:15908 LF.IndPrinciples <> n var
 R16089:16095 LF.Induction <> add_0_r thm
 R16089:16095 LF.Induction <> add_0_r thm
 R16089:16095 LF.Induction <> add_0_r thm
-R16169:16177 LF.Induction <> plus_n_Sm prfax
-R16169:16177 LF.Induction <> plus_n_Sm prfax
-R16169:16177 LF.Induction <> plus_n_Sm prfax
+R16169:16177 LF.Induction <> plus_n_Sm thm
+R16169:16177 LF.Induction <> plus_n_Sm thm
+R16169:16177 LF.Induction <> plus_n_Sm thm
 R16883:16884 LF.ProofObjects <> ev ind
 R17031:17034 Coq.Init.Logic <> ::type_scope:x_'->'_x not
 R17028:17030 Coq.Init.Datatypes <> nat ind
