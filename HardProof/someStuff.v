@@ -235,6 +235,8 @@ Proof.
     - simpl. apply IHk.
 Qed.
 
+
+
 (* 
 Theorem plus_x_minus_x: ∀ n x : nat,
     n + x - x = n.
@@ -325,13 +327,73 @@ Proof.
     reflexivity.
 Qed.
 
-Theorem div2_mult2_plus: forall (n m : nat),
+(*Theorem div2_mult2_plus: forall (n m : nat),
   n + div2 m = div2 (2 * n + m).
 Proof.
   intros n m.
   induction n.
   - reflexivity.
   -  
+Qed.*)
+
+Theorem minus_zero: ∀ m : nat,
+    m - 0 = m.
+Proof.
+    intros. induction m as [|k].
+    - simpl. reflexivity.
+    - simpl. reflexivity. 
+Qed.
+
+Search (_ <= S _).
+(* Nat.lt_le_incl: ∀ n m : nat, n < m → n <= m *)
+(* Nat.le_pred_le_succ: ∀ n m : nat, Nat.pred n <= m ↔ n <= S m *)
+
+Theorem lessEq_implies_then_less_implies (P : nat -> Prop) :
+    ∀ m n : nat, (m <= n → P n ) -> (m < n -> P n).
+Proof.
+    intros. assert (m < n -> m <= n). 
+        {
+            intros. apply Nat.lt_le_incl. apply H1. 
+        }
+    apply H1 in H0.
+    apply H in H0. apply H0.
+Qed.
+
+(* Perguntar para o professor por que não há quantificador sobre a pre-
+posição P *)
+Theorem m_less_than_n_implies (P : nat -> Prop) : 
+    ∀ n m : nat, (m < n) -> (P(n)) <-> P(n).
+Proof.
+    intros. reflexivity.    
+Qed.
+
+Theorem if_B_then_A_implies_B: ∀ A B : Prop,
+    B -> (A -> B).
+Proof.
+    intros. apply H.
+Qed.
+(* Por que o teorema acima quando aplicado em B leva para o próprio B,
+ e não para A -> B que é o que preciso? *)
+Theorem implies_true_implies: forall A B C : Prop,
+    (B /\ ((A -> B) -> C)) -> C.
+Proof.
+    intros. destruct H. 
+    pose proof if_B_then_A_implies_B.
+    specialize (H1 A B).
+    apply H1 in H. 
+Qed.
+
+
+
+Lemma strong_ind (P : nat -> Prop) :
+  ∀ m : nat, (P (m) /\ (∀ k : nat, ((m < k) -> P(k)) -> P(S k))) -> forall n : nat,(m <= n -> P(n)).
+Proof.
+    intro. intros. destruct H. induction n.
+    - specialize H1 with 0. destruct m.
+        -- apply H.
+        -- inversion H0.
+    - specialize H1 with n.  apply lessEq_implies_then_less_implies in IHn.
+
 Qed.
 
 Theorem is_2i_plus_one_neg_2i: ∀ n : nat,
