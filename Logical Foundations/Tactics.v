@@ -73,6 +73,7 @@ Theorem silly_ex : forall p,
   even p = true ->
   odd (S p) = true.
 Proof.
+  intros
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
