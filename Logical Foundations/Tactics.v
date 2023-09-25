@@ -67,14 +67,15 @@ Proof.
 (** **** Exercise: 2 stars, standard, optional (silly_ex)
 
     Complete the following proof using only [intros] and [apply]. *)
-Theorem silly_ex : forall p,
+(* Theorem silly_ex : forall p,
   (forall n, even n = true -> even (S n) = false) ->
   (forall n, even n = false -> odd n = true) ->
   even p = true ->
   odd (S p) = true.
 Proof.
   intros
-  (* FILL IN HERE *) Admitted.
+  (* FILL IN HERE *) 
+  Admitted. *)
 (** [] *)
 
 (** To use the [apply] tactic, the (conclusion of the) fact
@@ -83,8 +84,7 @@ Proof.
     and right sides of the equality are swapped. *)
 
 Theorem silly3 : forall (n m : nat),
-  n = m ->
-  m = n.
+  (n = m) -> (m = n).
 Proof.
   intros n m H.
 
@@ -279,7 +279,13 @@ Example injection_ex3 : forall (X : Type) (x y z : X) (l j : list X),
   j = z :: l ->
   x = y.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  (* intros. rewrite H0 in H.
+  injection H as C1 C2. symmetry in C1. 
+  symmetry in C2. rewrite C2 in C1. symmetry in C1.
+  apply C1. *)
+  intros. injection H as C1 C2. rewrite <- C2 in H0.
+  injection H0 as C3. rewrite C1. symmetry. apply C3.
+Qed.
 (** [] *)
 
 (** So much for injectivity of constructors.  What about disjointness? *)
@@ -329,7 +335,8 @@ Example discriminate_ex3 :
     x :: y :: l = [] ->
     x = z.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. discriminate H.
+Qed.
 (** [] *)
 
 (** For a slightly more involved example, we can use [discriminate] to
@@ -338,7 +345,10 @@ Proof.
 Theorem eqb_0_l : forall n,
    0 =? n = true -> n = 0.
 Proof.
-  intros n.
+  (* intros n. intro. destruct n.
+  - reflexivity.
+  - simpl in H. discriminate.
+Qed. *)
 
 (** We can proceed by case analysis on [n]. The first case is
     trivial. *)
@@ -481,6 +491,10 @@ Proof.
 
 Abort.
 
+(* Anotação: construtores são sempre funções injetores, por isso
+  podemos usar o injection quando temos isso, o que não pode ser
+  feito por exemplo com double n = double m pois double não é construtor *)
+
 (** What went wrong? *)
 
 (** The problem is that, at the point we invoke the induction
@@ -586,6 +600,12 @@ Proof.
     something too specific: When proving a property involving two
     variables [n] and [m] by induction on [n], it is sometimes crucial
     to leave [m] generic. *)
+
+(*" O resumo disto cima é: atrasar a introdução de variáveis
+  pode ajudar principalmete com indução (ter uma hipótes com forall
+  é muito melhor) ainda mais em casos como este específico em que ter
+  introduzido todas as variáveis antes de iniciar a indução impede
+  que se termine a prova." *)
 
 (** The following exercise, which further strengthens the link between
     [=?] and [=], follows the same pattern. *)
