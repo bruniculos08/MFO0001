@@ -136,6 +136,7 @@ Proof.
   intros a b c d e f eq1 eq2.
   rewrite -> eq1. rewrite -> eq2. reflexivity.  Qed.
 
+
 (** Since this is a common pattern, we might like to pull it out as a
     lemma that records, once and for all, the fact that equality is
     transitive. *)
@@ -411,7 +412,6 @@ Theorem S_inj : forall (n m : nat) (b : bool),
   (n =? m) = b.
 Proof.
   intros n m b H. simpl in H. apply H.  Qed.
-
 (** Similarly, [apply L in H] matches some conditional statement
     [L] (of the form [X -> Y], say) against a hypothesis [H] in the
     context.  However, unlike ordinary [apply] (which rewrites a goal
@@ -614,7 +614,15 @@ Proof.
 Theorem eqb_true : forall n m,
   n =? m = true -> n = m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent m. induction n as [|k].
+  - intros. simpl in H. destruct m.
+    -- reflexivity.
+    -- discriminate H.
+  - intros. destruct m.
+    -- simpl in H. discriminate H.
+    -- simpl in H. specialize (IHk m). apply IHk in H. Search (_ = _ -> S _ = S _).
+    apply eq_S in H. apply H.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, advanced (eqb_true_informal)
@@ -744,7 +752,12 @@ Theorem nth_error_after_last: forall (n : nat) (X : Type) (l : list X),
   length l = n ->
   nth_error l n = None.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent n. induction l as [|h t].
+  - simpl. reflexivity.
+  - simpl. destruct n.
+    -- intros. discriminate H.
+    -- intros. specialize (IHt n). injection H. intro. apply IHt in H0. apply H0.
+Qed. 
 (** [] *)
 
 (* ################################################################# *)
@@ -930,7 +943,20 @@ Theorem combine_split : forall X Y (l : list (X * Y)) l1 l2,
   split l = (l1, l2) ->
   combine l1 l2 = l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent l1. generalize dependent l2. induction l as [|h t].
+  - intros. simpl in H. injection H. intros. rewrite <- H0. rewrite <- H1. simpl. reflexivity.
+  - destruct h. intros. simpl in H. destruct (split t) as [t1 t2].
+    -- destruct l1.
+      --- discriminate H.
+      --- destruct l2.
+        ---- discriminate H.
+        ---- injection H. intros. simpl. specialize (IHt l2 l1). rewrite H0 in IHt. rewrite H2 in IHt.
+        assert ( (l1, l2) = (l1, l2) ). {
+          reflexivity.
+        }
+        apply IHt in H4.
+        rewrite H4. rewrite H3. rewrite H1. reflexivity.
+Qed.
 (** [] *)
 
 (** The [eqn:] part of the [destruct] tactic is optional; although

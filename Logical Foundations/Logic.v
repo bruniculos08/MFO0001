@@ -148,7 +148,19 @@ Qed.
 Example and_exercise :
   forall n m : nat, n + m = 0 -> n = 0 /\ m = 0.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  split.
+  - destruct n as [|n'].
+    -- reflexivity.
+    -- discriminate H.
+    (* Veja que n' é um natural e o objetivo é provar S(n') = 0, 
+     o que é obviamente uma falsidade pois n' >= 0 (visto que é 
+     um número natural) portanto resta nos mostrar que alguma das
+     hipóteses é falsa, que no caso é H: S n' + m = 0 *)
+  - destruct m as [|m'].
+    -- reflexivity.
+    -- rewrite add_comm in H. simpl in H. discriminate H.
+Qed.
+
 (** [] *)
 
 (** So much for proving conjunctive statements.  To go in the other
@@ -226,7 +238,11 @@ Proof.
 Lemma proj2 : forall P Q : Prop,
   P /\ Q -> Q.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P Q HPQ.
+  destruct HPQ as [_ HQ].
+  apply HQ.
+Qed.
+
 (** [] *)
 
 (** Finally, we sometimes need to rearrange the order of conjunctions
@@ -253,7 +269,12 @@ Theorem and_assoc : forall P Q R : Prop,
   P /\ (Q /\ R) -> (P /\ Q) /\ R.
 Proof.
   intros P Q R [HP [HQ HR]].
-  (* FILL IN HERE *) Admitted.
+  split.
+  - split.
+    -- apply HP.
+    -- apply HQ.
+  - apply HR.
+Qed.
 (** [] *)
 
 (** By the way, the infix notation [/\] is actually just syntactic

@@ -77,6 +77,7 @@ Inductive day : Type :=
   | saturday
   | sunday.
 
+
 (** The new type is called [day], and its members are [monday],
     [tuesday], etc.
 
