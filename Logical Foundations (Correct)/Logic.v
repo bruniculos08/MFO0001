@@ -2038,7 +2038,10 @@ Qed.
 Theorem excluded_middle_irrefutable: forall (P : Prop),
   ~ ~ (P \/ ~ P).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. unfold not. intros. apply H. right. 
+  intros. apply H. left. apply H0.
+Qed. 
+
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced (not_exists_dist)
@@ -2059,7 +2062,26 @@ Theorem not_exists_dist :
   forall (X:Type) (P : X -> Prop),
     ~ (exists x, ~ P x) -> (forall x, P x).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. unfold not in H0. unfold excluded_middle in H.
+  specialize (H (P x)). destruct H.
+  - apply H.
+  - unfold not in H. apply ex_falso_quodlibet. apply H0. exists x.
+  apply H.
+Qed.
+
+(* "Coisas importantes para lembrar pra prova:
+  1 - f_equal
+  2 - injection
+  3 - discriminate
+  4 - exists
+  5 - destruct
+  6 - apply ex_falso_quodlibet
+  7 - apply I
+  8 - specialize (Hipótese x1 x2 ... xn)
+  9 - generalize dependent x
+  10 - rewrite
+" *)
+
 (** [] *)
 
 (** **** Exercise: 5 stars, standard, optional (classical_axioms)
