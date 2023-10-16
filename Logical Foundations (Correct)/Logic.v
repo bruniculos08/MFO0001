@@ -1873,13 +1873,31 @@ Qed.
 
 (** Copy the definition of [forallb] from your [Tactics] here
     so that this file can be graded on its own. *)
-Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool :=
+  match l with
+  | nil => true
+  | h :: t => match (test h) with
+              | true => forallb test t
+              | false => false
+              end
+  end.
 
 Theorem forallb_true_iff : forall X test (l : list X),
   forallb test l = true <-> All (fun x => test x = true) l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction l as [|h t].
+  - split.
+    -- intros. simpl in H. simpl. apply I.
+    -- intros. simpl. simpl in H. reflexivity.
+  - split.
+    -- intros. simpl in H. simpl. destruct (test h) eqn:Case.
+      --- split.
+        ---- reflexivity.
+        ---- apply IHt in H. apply H.
+      --- discriminate H.
+    -- intros. simpl in H. destruct H. simpl. rewrite H.
+    apply IHt in H0. apply H0.
+Qed.
 
 (** (Ungraded thought question) Are there any important properties of
     the function [forallb] which are not captured by this
