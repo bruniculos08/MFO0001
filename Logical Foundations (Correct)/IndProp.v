@@ -264,6 +264,9 @@ Fail Inductive wrong_ev (n : nat) : Prop :=
 Theorem ev_4 : ev 4.
 Proof. apply ev_SS. apply ev_SS. apply ev_0. Qed.
 
+(* Lembre-se: contrutores são funções, por isso
+usamos apply com os construtores*)
+
 (** ... or we can use function application syntax to combine several
     constructors: *)
 
@@ -282,7 +285,11 @@ Qed.
 Theorem ev_double : forall n,
   ev (double n).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction n as [|k].
+  - simpl. apply ev_0.
+  - simpl. apply ev_SS. apply IHk.
+Qed.
+
 (** [] *)
 
 (* ################################################################# *)

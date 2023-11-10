@@ -2116,4 +2116,31 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
+    (* lem : law of excluded middle *)
+
+Theorem peirce_eq_lem: peirce <-> excluded_middle.
+Proof.
+  unfold peirce. unfold excluded_middle. intros. split.
+  - intros. apply H with (Q := ~P). intros. apply H with (Q := P).
+  intros. right. intro. apply H0 in H2 as H3.
+    -- destruct H3.
+    -- left. apply H2.
+  - intros. specialize H with (P := P) as H1. destruct H1.
+    -- apply H1.
+    -- apply H0. intros. apply H1 in H2. exfalso. apply H2.
+Qed.
+
+Theorem peirce_eq_double_negation_elimination: 
+  peirce <-> double_negation_elimination.
+Proof.
+  unfold peirce. unfold double_negation_elimination. 
+  split. 
+  - intros. 
+    intros. unfold not in H0. apply H with (Q := False). intros.
+    apply H0 in H1. destruct H1.
+  - intros. apply H. unfold not. intros. apply H1. apply H0.
+  intros. apply H1 in H2.
+  destruct H2.
+Qed.
+
 (* 2023-08-23 11:29 *)

@@ -372,18 +372,19 @@ Theorem if_B_then_A_implies_B: ∀ A B : Prop,
 Proof.
     intros. apply H.
 Qed.
+
 (* Por que o teorema acima quando aplicado em B leva para o próprio B,
  e não para A -> B que é o que preciso? *)
-Theorem implies_true_implies: forall A B C : Prop,
+(* Theorem implies_true_implies: forall A B C : Prop,
     (B /\ ((A -> B) -> C)) -> C.
 Proof.
     intros. destruct H. 
     pose proof if_B_then_A_implies_B.
     specialize (H1 A B).
-    apply H1 in H. 
+    apply H1 in H.
+    - apply H0. apply H1. apply H.
+    - pose proof if_B_then_A_implies_B.
 Qed.
-
-
 
 Lemma strong_ind (P : nat -> Prop) :
   ∀ m : nat, (P (m) /\ (∀ k : nat, ((m < k) -> P(k)) -> P(S k))) -> forall n : nat,(m <= n -> P(n)).
@@ -394,7 +395,20 @@ Proof.
         -- inversion H0.
     - specialize H1 with n.  apply lessEq_implies_then_less_implies in IHn.
 
+Qed. *)
+
+Theorem two_a_is_not_two_b_plus_one: ∀ n m : nat, 
+    2 * n <> 2 * m + 1.
+Proof.
+    intros. generalize dependent n. induction m as [|k].
+    - intros. unfold not. intros. simpl in H. rewrite add_0_r in H.
+    destruct n.
+        -- simpl in H. discriminate H.
+        -- rewrite <- plus_n_Sm in H. injection H.
+        intros. discriminate H0.
+    - intros. unfold not in *. intros. apply IHk with (n := n). 
 Qed.
+
 
 Theorem is_2i_plus_one_neg_2i: ∀ n : nat,
     (∃ i : nat, n = 2 * i + 1) -> ~(∃ k : nat, n = 2 * k).
@@ -402,7 +416,9 @@ Proof.
     intros. unfold not. intros. destruct H. destruct H0.
     pose proof H0 as H1. rewrite H in H0.
     apply div2_both_sides in H0.
-    rewrite div2_mul2_eq.
+    rewrite <- div2_mul2_eq in H0.
+    rewrite <- H0 in H1.
+    rewrite H1 in H.
     
 
 Theorem succ_not_even: ∀ n : nat,
