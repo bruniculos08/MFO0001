@@ -69,6 +69,9 @@ Fail Fixpoint reaches_1_in (n : nat) :=
     concept "reaches [1] eventually" as an _inductively defined
     property_ of numbers: *)
 
+(* Prop é como se fosse o tipo e a declação do tipo 'reaches_1' ao... 
+  ...receber um natural vira um elemento de um tipo (que ele define).*)
+
 Inductive reaches_1 : nat -> Prop :=
   | term_done : reaches_1 1
   | term_more (n : nat) : reaches_1 (f n) -> reaches_1 n.
@@ -104,14 +107,37 @@ Module LePlayground.
     form [S m], give evidence that the first is less than or equal to
     [m]. *)
 
+(* Prop é como se fosse o tipo e a declação do tipo 'le' ao... 
+  ...receber dois naturais vira um elemento de um tipo (que ele define).*)
+
 Inductive le : nat -> nat -> Prop :=
   | le_n (n : nat)   : le n n
   | le_S (n m : nat) : le n m -> le n (S m).
+
+(* Note que os construtores são funções e nesse caso le_S constrói...
+  ... uma função (ou proposição) na qual se tiver houve um elemento...
+  ... do tipo le n m é retornado outro elemento do tipo le que é le n (S m).
+*)
+
+(* Anotando uma maneira de leitura desta preposição, dividindo a 2 casos, tem-se
+  (1) O construtor le_n recebe um natural n (na verdade recebe duas vezes o mesmo 
+  natural n, pois o tipo da proposiçãp é nat->nat->Prop) como argumento e retorna 
+  uma proposição le n n;
+  (2) O construtor le_S recebe 2 naturais n e m como arguemto e retorna uma propo-
+  sição que é uma função nat -> Prop; 
+*)
 
 End LePlayground.
 
 (** The _transitive closure_ of a relation [R] is the smallest
     relation that contains [R] and that is transitive.  *)
+
+(*  Note que clos_trans recebe uma relação e devolve uma função...
+    ... que retorna uma função que recebe dois elementos do tipo X...
+    ... e devolve um elemento do tipo (ou proposição) que ele define,...
+    ... sendo assim os construtores definem como se podem construir...
+    ... elementos do tipo (ou proposição).
+ *)
 
 Inductive clos_trans {X: Type} (R: X->X->Prop) : X->X->Prop :=
   | t_step (x y : X) :
@@ -131,6 +157,19 @@ Inductive clos_trans {X: Type} (R: X->X->Prop) : X->X->Prop :=
 (* FILL IN HERE
 
     [] *)
+
+Inductive close_refl_trans {X : Type} (R : X->X->Prop) : X->X->Prop :=
+  | mantain (x y : X) : R x y -> close_refl_trans R x y
+  | create_refl (x : X) : close_refl_trans R x x
+  | create_trans (x y z : X) :
+    close_refl_trans R x y ->
+    close_refl_trans R y z ->
+    close_refl_trans R x z.
+
+(* Erro interessante ao retornar apenas R x x no construtor create_refl *)
+
+(* Note que os construtores não tem o mesmo tipo que o definido na própria...
+  ... proposição indutiva. *)
 
 (* ================================================================= *)
 (** ** Permutations *)
@@ -164,6 +203,24 @@ Inductive Perm3 {X : Type} : list X -> list X -> Prop :=
 (* FILL IN HERE
 
     [] *)
+
+Example permEx1: 
+  (Perm3 [1;2;3] [3;2;1]).
+Proof.
+  apply perm3_trans with (l2 := [2; 1; 3]).
+  - apply perm3_swap12.
+  - apply perm3_trans with (l2 := [2; 3; 1]).
+    -- apply perm3_swap23.
+    -- apply perm3_swap12.
+Qed.
+
+Example permItSelf:
+  (Perm3 [1;2;3] [1;2;3]).
+Proof.
+  apply perm3_trans with (l2 := [2; 1; 3]).
+  - apply perm3_swap12.
+  - apply perm3_swap12.
+Qed.
 
 (* ================================================================= *)
 (** ** Evenness (yet again) *)
@@ -207,6 +264,18 @@ Inductive ev : nat -> Prop :=
   | ev_0                       : ev 0
   | ev_SS (n : nat) (H : ev n) : ev (S (S n)).
 
+(* Note que ev retorna (sem receber argumento nenhum) uma função que...
+  ... leva de um natural para uma proposição (tipo), ou seja, com um...
+  ... um natural ev é uma proposição (elemento de um tipo). *)
+
+(* Note que H é uma hipótese, logo tem tipo Prop que o mesmo que ev apli-...
+  ...cado sobre um natural n. *)
+
+(* De maneira estranha podemos dizer que ':' não só pode definir tipo...
+  ... mas também retorno ao mesmo tempo, no entantno colocar o argumento...
+  ... antes de ':' instanciado como 'n' obrigaria que o argumento nat de ev...
+  ... em todo caso fosse n, assim ev_0 não poderia construir (retornar) ev 0.*)
+
 (** This definition is interestingly different from previous uses of
     [Inductive].  For one thing, we are defining not a [Type] (like
     [nat]) or a function yielding a [Type] (like [list]), but rather a
@@ -240,13 +309,23 @@ Inductive ev : nat -> Prop :=
 Fail Inductive wrong_ev (n : nat) : Prop :=
   | wrong_ev_0 : wrong_ev 0
   | wrong_ev_SS (H: wrong_ev n) : wrong_ev (S (S n)).
+
 (* ===> Error: Last occurrence of "[wrong_ev]" must have "[n]" as 1st
         argument in "[wrong_ev 0]". *)
+
+(* "Minha anotação:"
+  O erro ocorre por que é forçado que o primeiro argumento seja...
+  ... sempre 'n' para wrong_ev (note que isto é importante pois...
+  ... no caso de (X : Type) se força que os construtores sempre...
+  ... trabalhem com o mesmo tipo 'X' enquanto utilizando Type -> Algo...
+  ... não se força que os construtores trabalhem sempre sobre o mesmo...
+  ... tipo). *)
 
 (** In an [Inductive] definition, an argument to the type constructor
     on the left of the colon is called a "parameter", whereas an
     argument on the right is called an "index" or "annotation."
 
+    "Importante:"
     For example, in [Inductive list (X : Type) := ...], the [X] is a
     parameter, while in [Inductive ev : nat -> Prop := ...], the
     unnamed [nat] argument is an index. *)
@@ -264,7 +343,7 @@ Fail Inductive wrong_ev (n : nat) : Prop :=
 Theorem ev_4 : ev 4.
 Proof. apply ev_SS. apply ev_SS. apply ev_0. Qed.
 
-(* Lembre-se: contrutores são funções, por isso
+(* Lembre-se: contrutores são funções (injetoras), por isso
 usamos apply com os construtores*)
 
 (** ... or we can use function application syntax to combine several
@@ -305,6 +384,7 @@ Qed.
     constructors are the _only_ ways to build evidence that numbers
     are [ev]. *)
 
+(* "Importante:" *)
 (** In other words, if someone gives us evidence [E] for the assertion
     [ev n], then we know that [E] must be one of two things:
 
@@ -336,11 +416,18 @@ Theorem ev_inversion : forall (n : nat),
     ev n ->
     (n = 0) \/ (exists n', n = S (S n') /\ ev n').
 Proof.
+  (* Lembrar que para o caso base (o que é arbitrário de certa forma)...
+  ... o destruct não precisa de parâmetros: *)
   intros n E.  destruct E as [ | n' E'] eqn:EE.
+  (* "(1) Caso ev 0 tenha sido construído por ev_0:" *)
   - (* E = ev_0 : ev 0 *)
     left. reflexivity.
+  (* "(2) Caso ev n tenha sido construído por ev_SS (onde...
+      ... n = S(S(n')) ) " *)
   - (* E = ev_SS n' E' : ev (S (S n')) *)
-    right. exists n'. split. reflexivity. apply E'.
+    right. exists n'. split. 
+    -- reflexivity.
+    -- apply E'.
 Qed.
 
 (** Facts like this are often called "inversion lemmas" because they
@@ -355,7 +442,7 @@ Qed.
 
 Theorem evSS_ev : forall n, ev (S (S n)) -> ev n.
 Proof.
-  intros n H. apply ev_inversion in H.  destruct H as [H0|H1].
+  intros n H. apply ev_inversion in H. destruct H as [H0|H1].
   - discriminate H0.
   - destruct H1 as [n' [Hnm Hev]]. injection Hnm as Heq.
     rewrite Heq. apply Hev.
@@ -399,7 +486,8 @@ Qed.
 
 Theorem one_not_even' : ~ ev 1.
 Proof.
-  intros H. inversion H. Qed.
+  intros H. inversion H.
+Qed.
 
 (** **** Exercise: 1 star, standard (inversion_practice)
 
@@ -409,7 +497,8 @@ Proof.
 Theorem SSSSev__even : forall n,
   ev (S (S (S (S n)))) -> ev n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. inversion H. inversion H1. apply H3.
+Qed.
 (** [] *)
 
 (** **** Exercise: 1 star, standard (ev5_nonsense)
@@ -419,7 +508,12 @@ Proof.
 Theorem ev5_nonsense :
   ev 5 -> 2 + 2 = 9.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. inversion H. inversion H1. apply ev_inversion in H3.
+  destruct H3.
+  - discriminate H3.
+  - destruct H3. destruct H3. 
+  discriminate H3.
+Qed.
 (** [] *)
 
 (** The [inversion] tactic does quite a bit of work. For
@@ -436,12 +530,16 @@ Proof.
 Theorem inversion_ex1 : forall (n m o : nat),
   [n; m] = [o; o] -> [n] = [m].
 Proof.
-  intros n m o H. inversion H. reflexivity. Qed.
+  intros n m o H. 
+  (* injection H. intros. *)
+  inversion H. reflexivity. Qed.
 
 Theorem inversion_ex2 : forall (n : nat),
   S n = O -> 2 + 2 = 5.
 Proof.
-  intros n contra. inversion contra. Qed.
+  intros n contra. 
+  (* Aqui o 'inversion' é usado no lugar de 'discriminate' *)
+  inversion contra. Qed.
 
 (** Here's how [inversion] works in general.
       - Suppose the name [H] refers to an assumption [P] in the
@@ -583,7 +681,11 @@ Qed.
 (** **** Exercise: 2 stars, standard (ev_sum) *)
 Theorem ev_sum : forall n m, ev n -> ev m -> ev (n + m).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H as [|k Hk].
+  - simpl. apply H0.
+  - simpl. apply ev_SS. apply IHHk. 
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced, optional (ev'_ev)
@@ -605,8 +707,26 @@ Inductive ev' : nat -> Prop :=
 
 Theorem ev'_ev : forall n, ev' n <-> ev n.
 Proof.
- (* FILL IN HERE *) Admitted.
-(** [] *)
+  intros. split.
+  - intros. induction H as [ | |k ].
+    -- apply ev_0.
+    -- apply ev_SS. apply ev_0.
+    -- apply ev_sum.
+      --- apply IHev'1.
+      --- apply IHev'2.
+  - intros. induction H as [ | k].
+    -- apply ev'_0.
+    -- assert (H1: S(S(k)) = k + 2). {
+      rewrite <- plus_n_Sm. rewrite <- plus_n_Sm.
+      Search (_ + 0).
+      rewrite <- plus_n_O.
+      reflexivity.
+    }
+    rewrite H1.
+    apply ev'_sum.
+      --- apply IHev.
+      --- apply ev'_2.
+Qed.
 
 (** **** Exercise: 3 stars, advanced, especially useful (ev_ev__ev) *)
 Theorem ev_ev__ev : forall n m,
@@ -614,7 +734,11 @@ Theorem ev_ev__ev : forall n m,
   (* Hint: There are two pieces of evidence you could attempt to induct upon
       here. If one doesn't work, try the other. *)
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H0.
+  - simpl in H. apply H.
+  - simpl in H. inversion H. apply IHev in H2. apply H2.
+Qed. 
+
 (** [] *)
 
 (** **** Exercise: 3 stars, standard, optional (ev_plus_plus)
@@ -626,7 +750,25 @@ Proof.
 Theorem ev_plus_plus : forall n m p,
   ev (n+m) -> ev (n+p) -> ev (m+p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. apply ev'_ev in H. apply ev'_ev in H0. apply ev'_ev.
+  - assert (H1: ev' ((n+m) + (n+p)) ). 
+  {
+    apply ev'_sum. apply H. apply H0.
+  }
+  assert (H2 : n + m + (n + p) = (n + n) + (m + p)). 
+  {
+    Search (plus). assert (n + p = p + n). {
+      apply add_comm.
+    }
+    rewrite H2. rewrite add_assoc. rewrite add_comm.
+    rewrite <- add_assoc. rewrite add_assoc. reflexivity.
+  } 
+  rewrite H2 in H1. apply ev'_ev in H1. 
+  apply ev_ev__ev with (n := n + n) (m := m + p) in H1.
+    -- apply ev'_ev in H1. apply H1.
+    -- apply ev_Even_iff. unfold Even. exists n. Search (double _).
+    symmetry. apply double_plus.
+Qed.
 (** [] *)
 
 (* ################################################################# *)
@@ -703,12 +845,13 @@ End Playground.
     between every pair of natural numbers. *)
 
 Inductive total_relation : nat -> nat -> Prop :=
-  (* FILL IN HERE *)
+  total (n m : nat) : total_relation n m
 .
 
 Theorem total_relation_is_total : forall n m, total_relation n m.
-  Proof.
-  (* FILL IN HERE *) Admitted.
+Proof.
+  intros. apply total.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (empty_relation)
@@ -717,12 +860,17 @@ Theorem total_relation_is_total : forall n m, total_relation n m.
     that never holds. *)
 
 Inductive empty_relation : nat -> nat -> Prop :=
-  (* FILL IN HERE *)
 .
+
+(* Note que a relação vazia não pode ser construida pois não
+há nenhum construtor. *)
 
 Theorem empty_relation_is_empty : forall n m, ~ empty_relation n m.
   Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. unfold not. intros. destruct H.
+Qed.
+
+
 (** [] *)
 
 (** From the definition of [le], we can sketch the behaviors of
@@ -741,103 +889,200 @@ Theorem empty_relation_is_empty : forall n m, ~ empty_relation n m.
     we are going to need later in the course.  The proofs make good
     practice exercises. *)
 
+
+Lemma less_succ_then_less : forall m n,
+  S n <= m -> n <= m.
+Proof.
+  intros. induction H.
+  - apply le_S. apply le_n.
+  - apply le_S. apply IHle.
+Qed.   
+
 (** **** Exercise: 5 stars, standard, optional (le_and_lt_facts) *)
 Lemma le_trans : forall m n o, m <= n -> n <= o -> m <= o.
+
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H.
+  - apply H0.
+  - apply IHle. apply less_succ_then_less in H0. apply H0.
+Qed. 
 
 Theorem O_le_n : forall n,
   0 <= n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction n.
+  - apply le_n.
+  - apply le_S. apply IHn.
+Qed.
 
 Theorem n_le_m__Sn_le_Sm : forall n m,
   n <= m -> S n <= S m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H.
+  - apply le_n.
+  - apply le_S. apply IHle.
+Qed.
 
 Theorem Sn_le_Sm__n_le_m : forall n m,
   S n <= S m -> n <= m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. inversion H.
+  - apply le_n.
+  - apply less_succ_then_less. apply H1.
+Qed. 
 
 Theorem lt_ge_cases : forall n m,
   n < m \/ n >= m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction n.
+  - destruct m.
+    -- right. apply le_n.
+    -- left. unfold lt. apply n_le_m__Sn_le_Sm. apply O_le_n.
+  - destruct IHn.
+    -- destruct H.
+      --- right. apply le_n.
+      --- left. unfold lt. apply n_le_m__Sn_le_Sm. apply H.
+    -- right. apply le_S. apply H.
+Qed.
 
 Theorem le_plus_l : forall a b,
   a <= a + b.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction b.
+  - rewrite <- plus_n_O. apply le_n.
+  - rewrite <- plus_n_Sm. apply le_S. apply IHb.
+Qed.
 
 Theorem plus_le : forall n1 n2 m,
   n1 + n2 <= m ->
   n1 <= m /\ n2 <= m.
 Proof.
- (* FILL IN HERE *) Admitted.
+  intros. split.
+  - induction H.
+    -- apply le_plus_l.
+    -- apply le_S. apply IHle.
+  - induction H.
+    -- rewrite add_comm. apply le_plus_l.
+    -- apply le_S. apply IHle.
+Qed.
 
 Theorem add_le_cases : forall n m p q,
   n + m <= p + q -> n <= p \/ m <= q.
   (** Hint: May be easiest to prove by induction on [n]. *)
 Proof.
-(* FILL IN HERE *) Admitted.
+  intro. induction n as [|k].
+  - intros. left. apply O_le_n.
+  - intros. destruct p.
+    -- simpl in H. apply less_succ_then_less in H.
+    apply plus_le in H. destruct H. right. apply H0.
+    -- rewrite plus_Sn_m in H. rewrite plus_Sn_m in H.
+    apply Sn_le_Sm__n_le_m in H. apply IHk in H. destruct H.
+      --- left. apply n_le_m__Sn_le_Sm. apply H.
+      --- right. apply H.
+Qed. 
 
 Theorem plus_le_compat_l : forall n m p,
   n <= m ->
   p + n <= p + m.
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  intros. induction p.
+  - simpl. apply H.
+  - simpl. apply n_le_m__Sn_le_Sm. apply IHp.
+Qed.
+  
 Theorem plus_le_compat_r : forall n m p,
   n <= m ->
   n + p <= m + p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite add_comm.
+  rewrite add_comm with (m := p). apply plus_le_compat_l.
+  apply H.
+Qed.
 
 Theorem le_plus_trans : forall n m p,
   n <= m ->
   n <= m + p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H.
+  - apply le_plus_l.
+  - apply le_S in IHle. rewrite <- plus_Sn_m in IHle. apply IHle.
+Qed.
 
 Theorem n_lt_m__n_le_m : forall n m,
   n < m ->
   n <= m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. unfold lt in H. apply less_succ_then_less in H. apply H.
+Qed.
 
 Theorem plus_lt : forall n1 n2 m,
   n1 + n2 < m ->
   n1 < m /\ n2 < m.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. unfold lt in *. split.
+  - rewrite <- plus_Sn_m in H. rewrite plus_n_O with (n := m) in H.
+  apply add_le_cases in H as H1. rewrite <- plus_n_O with (n := m) in H. 
+  destruct H1.
+    -- apply H0.
+    -- destruct n2.
+      --- rewrite <- plus_n_O with (n := S n1) in H. apply H.
+      --- inversion H0.
+  - rewrite plus_n_Sm in H. rewrite plus_n_O with (n := m) in H.
+  rewrite add_comm in H.
+  apply add_le_cases in H as H1. rewrite <- plus_n_O with (n := m) in H. 
+  destruct H1.
+    -- apply H0.
+    -- destruct n1.
+      --- rewrite <- plus_n_O with (n := S n2) in H. apply H.
+      --- inversion H0.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 4 stars, standard, optional (more_le_exercises) *)
 Theorem leb_complete : forall n m,
   n <=? m = true -> n <= m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intro. induction n.
+  - intros. apply O_le_n.
+  - intros. destruct m.
+    -- simpl in H. discriminate H.
+    -- apply n_le_m__Sn_le_Sm. apply IHn. simpl in H. apply H.
+Qed.
 
 Theorem leb_correct : forall n m,
   n <= m ->
   n <=? m = true.
   (** Hint: May be easiest to prove by induction on [m]. *)
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent n. induction m.
+  - intros. destruct n.
+    -- simpl. reflexivity.
+    -- inversion H.
+  - intros. destruct n.
+    -- simpl. reflexivity.
+    -- simpl. apply IHm. apply Sn_le_Sm__n_le_m. apply H.
+Qed.
 
 (** Hint: The next two can easily be proved without using [induction]. *)
 
 Theorem leb_iff : forall n m,
   n <=? m = true <-> n <= m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. split.
+  - apply leb_complete.
+  - apply leb_correct.
+Qed.
 
 Theorem leb_true_trans : forall n m o,
   n <=? m = true -> m <=? o = true -> n <=? o = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. apply leb_iff. apply leb_iff in H. apply leb_iff in H0.
+  apply le_trans with (m := n) (n := m) (o := o) in H.
+  - apply H.
+  - apply H0.
+Qed.
+
 (** [] *)
 
 Module R.
