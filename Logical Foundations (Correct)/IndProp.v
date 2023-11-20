@@ -1115,6 +1115,11 @@ Inductive R : nat -> nat -> nat -> Prop :=
 
 (* FILL IN HERE *)
 
+Example R1: R 1 1 2.
+Proof.
+  apply c3. apply c2. apply c1.
+Qed.
+
 (* Do not modify the following line: *)
 Definition manual_grade_for_R_provability : option (nat*string) := None.
 (** [] *)
@@ -1125,12 +1130,31 @@ Definition manual_grade_for_R_provability : option (nat*string) := None.
     Figure out which function; then state and prove this equivalence
     in Coq. *)
 
-Definition fR : nat -> nat -> nat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition fR : nat -> nat -> nat := plus.
 
 Theorem R_equiv_fR : forall m n o, R m n o <-> fR m n = o.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. unfold fR. split.
+  - intros H.
+    induction H.
+    -- reflexivity.
+    -- simpl. apply f_equal. apply IHR.
+    -- rewrite <- plus_n_Sm. apply f_equal. apply IHR.
+    -- simpl in IHR. rewrite <- plus_n_Sm in IHR. injection IHR.
+    intros. apply H0.
+    -- rewrite add_comm. apply IHR.
+  - generalize dependent o.
+  generalize dependent m.
+  generalize dependent n.
+  induction m as [|m'].
+    -- induction n as [|n'].
+      --- intros. simpl in H. rewrite <- H. apply c1.
+      --- intros. simpl in H. simpl in IHn'. rewrite <- H.
+      apply c3. apply IHn'. reflexivity.
+    -- intros. simpl in H. rewrite <- H. apply c2. apply IHm'.
+    reflexivity.
+Qed. 
+
 (** [] *)
 
 End R.
@@ -1171,28 +1195,47 @@ End R.
       transitive -- that is, if [l1] is a subsequence of [l2] and [l2]
       is a subsequence of [l3], then [l1] is a subsequence of [l3]. *)
 
+Search(list).
+    
 Inductive subseq : list nat -> list nat -> Prop :=
-(* FILL IN HERE *)
-.
+  | subseq_empty (ys : list nat) : subseq nil ys
+  | subseq_itself (xs : list nat) : subseq xs xs
+  | subseq_cond (xs : list nat) (ys : list nat) (h : nat) : (subseq xs ys) -> (subseq (h::xs) (h::ys)).
 
 Theorem subseq_refl : forall (l : list nat), subseq l l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. apply subseq_itself.
+Qed.
 
 Theorem subseq_app : forall (l1 l2 l3 : list nat),
   subseq l1 l2 ->
   subseq l1 (l2 ++ l3).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H.
+  - apply subseq_empty.
+  - induction xs.
+    -- apply subseq_empty.
+    -- simpl. apply subseq_cond. apply IHxs.
+  - simpl. apply subseq_cond. apply IHsubseq.
+Qed.
 
 Theorem subseq_trans : forall (l1 l2 l3 : list nat),
   subseq l1 l2 ->
   subseq l2 l3 ->
   subseq l1 l3.
 Proof.
+  intros. generalize dependent l3. induction H.
+  - intros. apply subseq_empty.
+  - intros. apply H0.
+  - intros. inversion H0.
+    -- apply subseq_cond. apply H.
+    -- apply subseq_cond. apply IHsubseq. apply H4.
+Qed.    
+
   (* Hint: be careful about what you are doing induction on and which
      other things need to be generalized... *)
-  (* FILL IN HERE *) Admitted.
+  (* FILL IN HERE *) 
+
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (R_provability2)
@@ -1375,7 +1418,9 @@ Qed.
 
 Example reg_exp_ex2 : [1; 2] =~ App (Char 1) (Char 2).
 Proof.
-  apply (MApp [1]).
+  (* apply (MApp [1]). *)
+  apply (MApp [1] (Char 1) [2] (Char 2)).
+  (* - apply (MChar 1). *)
   - apply MChar.
   - apply MChar.
 Qed.
@@ -1443,13 +1488,17 @@ Qed.
 Lemma empty_is_empty : forall T (s : list T),
   ~ (s =~ EmptySet).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. intro. inversion H.
+Qed.
 
 Lemma MUnion' : forall T (s : list T) (re1 re2 : reg_exp T),
   s =~ re1 \/ s =~ re2 ->
   s =~ Union re1 re2.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct H.
+  - apply MUnionL. apply H.
+  - apply MUnionR. apply H.
+Qed.
 
 (** The next lemma is stated in terms of the [fold] function from the
     [Poly] chapter: If [ss : list (list T)] represents a sequence of
@@ -1460,7 +1509,12 @@ Lemma MStar' : forall T (ss : list (list T)) (re : reg_exp T),
   (forall s, In s ss -> s =~ re) ->
   fold app ss [] =~ Star re.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction ss.
+  - simpl. apply MStar0.
+  - simpl. apply MStarApp.
+    -- apply H. simpl. left. reflexivity.
+    -- apply IHss. intros. apply H. simpl. right. apply H0.
+Qed.
 (** [] *)
 
 (** Since the definition of [exp_match] has a recursive
@@ -1506,6 +1560,11 @@ Proof.
     apply Hin.
   - (* MApp *)
     simpl.
+
+    (* Note que a hipotese de indução sobre qualquer tipo indutivo abre
+    um caso para cada possibilidade de construção desse tipo e em cada um
+    desse considera o que se quer provar como válido para os argumentos do
+    construtor. *)
 
 (** Something interesting happens in the [MApp] case.  We obtain
     _two_ induction hypotheses: One that applies when [x] occurs in
