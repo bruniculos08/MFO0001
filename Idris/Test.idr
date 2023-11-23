@@ -1,9 +1,11 @@
 module Test
 
 average : Double -> Double -> Double
-average x y = (x + y)/2 
+average x y = (x + y)/2
 
 infixr 10 :::
+
+data Bin = Zero | Um
 
 data Vect_main : Nat -> Type -> Type where
     Nil_main : Vect_main Z a

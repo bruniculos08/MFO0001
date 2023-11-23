@@ -1,7 +1,7 @@
-module Prims
+module Seminario
 
 word : String
-foo = "Some string"
+word = "Some string"
 
 x, y : Int
 x = 10
@@ -25,7 +25,6 @@ flag = False
 --      94
 --      Prims> if x == 8 * 8 + 30 then "Yes!" else "No!"
 --      "Yes!"
-
 
 app_one : a -> List a -> List a
 app_one x [] = x :: Nil
