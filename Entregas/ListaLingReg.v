@@ -170,8 +170,8 @@ Proof.
   - simpl. apply IHn.
 Qed.
 
-Lemma  napp_plus: forall T : Type, forall m n : nat, forall l : list T,
-  napp (n + m) l = napp n l ++ napp m l.
+Lemma  napp_plus: forall T : Type, forall m n : nat, forall s : list T,
+  napp (n + m) s = napp n s ++ napp m s.
 Proof.
   intros.
   induction n as [|n IHn].
