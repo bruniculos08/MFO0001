@@ -71,7 +71,11 @@ Proof.
 Theorem plus_one_r' : forall n:nat,
   n + 1 = S n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  apply nat_ind.
+  - reflexivity.
+  - intros. simpl. rewrite H. reflexivity.
+Qed.
+  (*  FILL IN HERE Admitted. *)
 (** [] *)
 
 (** Coq generates induction principles for every datatype
@@ -187,16 +191,33 @@ Inductive booltree : Type :=
    in between here and there. Fill in those definitions based on what
    you wrote on paper. *)
 
+   (* 
+    Induction Principle for booltree:
+    forall P : booltree -> Prop,
+    P bt_empty ->
+    forall b : bool, P (bt_leaf b) ->
+    (forall b : bool, forall t1 t2 : booltree,
+    P t1 -> P t2 -> P (bt_branch b t1 t2)) -> 
+    forall t : booltree, P t.
+    *)
+
 Definition booltree_property_type : Type := booltree -> Prop.
 
-Definition base_case (P : booltree_property_type) : Prop
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition base_case (P : booltree_property_type) : Prop :=
+  P bt_empty.
+  (* REPLACE THIS LINE WITH ":= _your_definition_ .". Admitted. *)
 
-Definition leaf_case (P : booltree_property_type) : Prop
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition leaf_case (P : booltree_property_type) : Prop :=
+  forall b : bool, P (bt_leaf b).
+  (* REPLACE THIS LINE WITH ":= _your_definition_ .". Admitted. *)
 
-Definition branch_case (P : booltree_property_type) : Prop
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition branch_case (P : booltree_property_type) : Prop :=
+  (forall b : bool, forall t1 : booltree,
+    P t1 -> 
+    (forall t2 : booltree, P t2 -> 
+    P (bt_branch b t1 t2))
+    ).
+  (* REPLACE THIS LINE WITH ":= _your_definition_ .". Admitted. *)
 
 Definition booltree_ind_type :=
   forall (P : booltree_property_type),
@@ -211,8 +232,33 @@ Definition booltree_ind_type :=
     automatically generated induction principle [booltree_ind] has the
     same type as what you just defined. *)
 
+
+
+Theorem induction_nat:
+  forall P : nat -> Prop,
+  P 0 -> (forall n : nat, P n -> P (S n)) -> forall n : nat, P n.
+Proof.
+  intros. destruct n.
+  - apply H.
+  -
+
+
 Theorem booltree_ind_type_correct : booltree_ind_type.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+(* exact booltree_ind. *)
+  unfold booltree_ind_type.
+  unfold booltree_property_type.
+  unfold base_case.
+  unfold leaf_case.
+  unfold branch_case.
+  intro. intro. intro. intro. destruct b.
+  - assumption.
+  - apply H0.
+  - apply H1.
+
+
+
+(* FILL IN HERE *) Admitted.
 
 (** [] *)
 

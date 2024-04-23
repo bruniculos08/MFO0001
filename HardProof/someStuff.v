@@ -472,7 +472,7 @@ Proof.
             rewrite even_succ.
             apply contraposition in H0.
             --- rewrite diff_true_is_false in H0. apply H0.
-            ---
+            --- 
 Qed.
 
 Theorem not_even_classic_def: ∀ n : nat,
