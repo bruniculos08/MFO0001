@@ -52,7 +52,7 @@ Fixpoint odd (n : nat) : bool :=
     | S (S n) => odd n
     end.
 
-Fixpoint notb (b : bool) : bool :=
+Definition notb (b : bool) : bool :=
     match b with
     | true => false
     | false => true
@@ -314,7 +314,8 @@ Proof.
         -- rewrite Nat.mul_0_r in H. discriminate H.
         -- right. rewrite Nat.mul_comm in H.
         simpl in H. rewrite H.
-        apply le_plus_l.
+        Search (_ <= _ + _).
+        apply Nat.le_add_r.
 Qed.
 
 Lemma divisibility_transitivity:
@@ -515,7 +516,7 @@ Proof.
                 ++ apply H0.
 Qed.
 
-Fixpoint get_max (A : list nat) : nat :=
+Definition get_max (A : list nat) : nat :=
     fold_left (fun n m => if (m <=? n) then n else m) A 0.
     
 Lemma aux_get_max:
@@ -556,7 +557,7 @@ Proof.
             apply Case1.
             ++ apply IHxs.
 Qed.
-
+(* 
 Lemma get_max_aux3:
     ∀ h1 h2, ∀ t, 
     (h1 <=? h2) = true -> get_max (h1 :: t) <= get_max (h2 :: t).
@@ -564,8 +565,11 @@ Proof.
     intros. generalize dependent h1. generalize dependent h2.
     induction t as [|x xs].
     - intros. destruct (h1 <=? 0) eqn:Case1.
-        -- simpl. rewrite Case1. apply Nat.le_0_l.
-        -- apply leb_complete in H. transitivity h2.
+        { unfold get_max. simpl. rewrite Case1. apply Nat.le_0_l. }
+        { unfold get_max. simpl. rewrite Case1.  }
+        --
+        
+         apply leb_complete in H. transitivity h2.
             + simpl. rewrite Case1. apply H.
             + simpl. destruct (h2 <=? 0) eqn:Case2.
                 ++ rewrite Nat.leb_le in Case2. apply Case2.
@@ -605,15 +609,16 @@ Proof.
                     rewrite H0 in IHxs. apply IHxs. 
                     apply Case4.
                     * apply le_n.
-Qed.          
+Qed.           *)
 
-Lemma get_max_aux4:
+(* Lemma get_max_aux4:
     ∀ h, ∀ t, 
     get_max t <= get_max (h :: t).
 Proof.
     intros. generalize dependent h.
     induction t as [|x xs].
     - intros. simpl. apply Nat.le_0_l.
+            }
     - intros. simpl (get_max (h :: x :: xs)). destruct (h <=? 0) eqn:Case1.
         -- simpl. apply le_n.
         -- destruct (x <=? h) eqn:Case2.
@@ -625,10 +630,9 @@ Proof.
                 transitivity h.
                     ++ apply Case1.
                     ++ rewrite leb_iff_conv in Case2. apply Case2.   
-            }
             rewrite H. apply le_n.
-Qed.
-
+Qed. *)
+(* 
 Lemma get_max_correctness: 
     ∀ A : list nat, ∀ n : nat, In n A -> n <= (get_max A).
 Proof.
@@ -657,7 +661,7 @@ Proof.
                 simpl in H0. rewrite Case in H0. transitivity (get_max t).
                     * apply H.
                     * apply H0.
-Qed.
+Qed. *)
 
 Definition gcd (a b n : nat) := 
     ((n ∣ a) /\ (n ∣ b)) /\ (∀ m : nat, (m ∣ a) /\ (m ∣ b) -> m <= n).
